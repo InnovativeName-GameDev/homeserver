@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs,... }:
 
 {
   # Enable flakes and nix-command experimental features system-wide
@@ -10,6 +10,7 @@
   environment.systemPackages = with pkgs; [
     gnupg
     git
+    sudo
   ];
 
 
@@ -22,11 +23,13 @@
   environment.etc."install.sh".mode = "0755";
 
   # Optional: run some setup script on ISO boot
-  system.activationScripts.iso-bootstrap.text = ''
-    echo "Booted live ISO";
-    echo "Welcome to the installer!"
-    read -p "Press ENTER to start installation..."
-    sudo /etc/install.sh
+  programs.bash.loginShellInit = ''
+    if [ -z "$INSTALLER_RAN" ]; then
+      export INSTALLER_RAN=1
+      echo "Booted live ISO!!"
+      echo "Welcome to the installer!"
+      read -p "Press ENTER to start installation..."
+      sudo /etc/install.sh
+    fi
   '';
-  
 }

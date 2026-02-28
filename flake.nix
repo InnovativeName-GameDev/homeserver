@@ -10,7 +10,7 @@
     nixosConfigurations = {
       iso = nixpkgs.lib.nixosSystem {
         inherit system;
-        modules = [ 
+        modules = [
             "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
             ./iso/iso.nix
         ];
@@ -20,8 +20,8 @@
         inherit system;
         modules = [
           ./hosts/nginx-homeserver/configuration.nix
-          ./modules/nginx.nix
-          ./modules/tailscale.nix
+          #./modules/nginx.nix
+          #./modules/tailscale.nix
         ];
       };
 
