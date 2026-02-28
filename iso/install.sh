@@ -24,4 +24,4 @@ DEFAULT_FLAKE="hostname"
 echo "Building default flake: $DEFAULT_FLAKE"
 
 # Rebuild system using flake
-nixos-rebuild switch --flake "$FLAKE_DIR#$DEFAULT_FLAKE"
+nixos-install --flake "$FLAKE_DIR#$DEFAULT_FLAKE"

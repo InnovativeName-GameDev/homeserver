@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      #./hardware-configuration.nix
+      ./hardware-configuration.nix
     ];
 
   # Bootloader.
@@ -54,12 +54,6 @@
     LC_TELEPHONE = "de_DE.UTF-8";
     LC_TIME = "de_DE.UTF-8";
   };
-
-  # Configure keymap in X11
-  #services.xserver.xkb = {
-  #  layout = "de";
-  #  variant = "";
-  #};
 
   # Configure console keymap
   console.keyMap = "de";
