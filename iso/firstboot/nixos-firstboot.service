@@ -1,0 +1,12 @@
+[Unit]
+Description=First boot flake setup
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=idle
+ExecStart=/root/nixos-firstboot.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
