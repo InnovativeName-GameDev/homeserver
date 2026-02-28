@@ -1,22 +1,21 @@
 { config, pkgs, lib, ... }:
 
 {
-  # Kernel modules for generic VM
   boot.initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "virtio_pci" "virtio_scsi" "sd_mod" "sr_mod" ];
   boot.kernelModules = [];
 
-  # Root filesystem
-  fileSystems."/" = {
-    device = "/dev/sda1";  # generic device path
-    fsType = "ext4";
-    options = [ "noatime" ];
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  fileSystems."/boot/efi" = {
+    device = "/dev/sda1";
+    fsType = "vfat";
   };
 
-  # Swap
-  swapDevices = [
-    { device = "/dev/sda2"; }
-  ];
+  fileSystems."/" = {
+    device = "/dev/sda2";
+    fsType = "ext4";
+  };
 
-  # Minimal host platform
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
