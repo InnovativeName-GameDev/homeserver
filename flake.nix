@@ -11,15 +11,17 @@
       iso = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [ 
+            "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
             ./iso/iso.nix
         ];
       };
 
-      nginx-homeservere = nixpkgs.lib.nixosSystem {
+      nginx-homeserver = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
           ./hosts/nginx-homeserver/configuration.nix
-          ./modules/nginx-common.nix
+          ./modules/nginx.nix
+          ./modules/tailscale.nix
         ];
       };
 
@@ -27,7 +29,8 @@
         inherit system;
         modules = [
           ./hosts/nginx-relay-server/configuration.nix
-          ./modules/nginx-common.nix
+          ./modules/nginx.nix
+          ./modules/tailscale.nix
         ];
       };
 

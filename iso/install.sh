@@ -2,17 +2,15 @@
 set -e
 
 # Paths
-ENCRYPTED_KEY=/etc/ssh/id_ed25519.gpg
-DECRYPTED_KEY=/root/.ssh/id_ed25519
+DEPLOY_KEY=/root/.ssh/id_ed25519
 FLAKE_DIR=/root/flake
 
 mkdir -p /root/.ssh
 
-# Prompt for passphrase
-if [ ! -f "$DECRYPTED_KEY" ]; then
-  echo "Enter passphrase to decrypt deploy key:"
-  gpg --quiet --batch --decrypt --output "$DECRYPTED_KEY" "$ENCRYPTED_KEY"
-  chmod 600 "$DECRYPTED_KEY"
+# Copy the key if not present (for now plain text)
+if [ ! -f "$DEPLOY_KEY" ]; then
+  cp /etc/ssh/id_ed25519 "$DEPLOY_KEY"
+  chmod 600 "$DEPLOY_KEY"
 fi
 
 # Clone flake if not already present
@@ -24,4 +22,6 @@ fi
 # Flake selection (choose default or first one)
 DEFAULT_FLAKE="hostname"
 echo "Building default flake: $DEFAULT_FLAKE"
-sudo nixos-rebuild switch --flake "$FLAKE_DIR#$DEFAULT_FLAKE"
+
+# Rebuild system using flake
+nixos-rebuild switch --flake "$FLAKE_DIR#$DEFAULT_FLAKE"

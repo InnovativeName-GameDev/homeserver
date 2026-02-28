@@ -1,24 +1,3 @@
-{ config, pkgs, ... }:
-
-{
-  imports = [
-    #for now just import it
-    /etc/nixos/hardware-configuration.nix
-  ]
-
-  boot.loader.grub.enable=true;
-
-  networking.hostName = "pve-nginx";
-
-  services.nginx.virtualHosts."example1.com" = {
-    root = "/var/www/example1";
-    enableACME = true;
-    forceSSL = true;
-  };
-
-  system.stateVersion = "24.05";
-}
-
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
@@ -28,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      #./hardware-configuration.nix
     ];
 
   # Bootloader.
