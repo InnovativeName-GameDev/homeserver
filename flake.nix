@@ -2,10 +2,8 @@
   description = "My Homeserver Infrastructure with Nixos Configs";
 
   inputs.nixpkgs.url = "nixpkgs/nixos-25.05";
-  inputs.disko.url = "github:nix-community/disko/latest";
-  inputs.disko.inputs.nixpkgs.follows = "nixpkgs";
 
-  outputs = { self, nixpkgs, disko }:
+  outputs = { self, nixpkgs }:
   let
     system = "x86_64-linux";
   in {
@@ -22,11 +20,9 @@
       nginx-homeserver = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-          disko.nixosModules.disko
           ./hosts/nginx-homeserver/configuration.nix
-          ./modules/vm-disk.nix
-          ./modules/nginx.nix
-          ./modules/tailscale.nix
+          #./modules/nginx.nix
+          #./modules/tailscale.nix
         ];
       };
 
@@ -36,7 +32,6 @@
           ./hosts/nginx-relay-server/configuration.nix
           ./modules/nginx.nix
           ./modules/tailscale.nix
-          disko.nixosModules.disko
         ];
       };
 
