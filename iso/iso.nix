@@ -1,6 +1,11 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix>
+    <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
+  ];
+
   # Enable flakes and nix-command experimental features system-wide
   nix.settings.experimental-features = [
     "nix-command"
