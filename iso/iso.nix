@@ -2,10 +2,33 @@
 
 {
   # Enable flakes and nix-command experimental features system-wide
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   boot.loader.grub.enable = false;
   services.openssh.enable = true;
+
+  # Enable networking
+  networking.networkmanager.enable = true;
+  networking.nameservers = ["1.1.1.1" "1.0.0.1" "8.8.8.8" "8.8.4.4"];
+
+  networking = {
+    interfaces.ens18 = {
+      ipv4.addresses = [
+        {
+          address = "192.168.178.250";
+          prefixLength = 24;
+        }
+      ];
+    };
+    defaultGateway = {
+      address = "192.168.178.1";
+      interface = "ens18";
+    };
+  };
+
 
   environment.systemPackages = with pkgs; [
     gnupg
@@ -45,10 +68,13 @@
     fsType = "ext4";
   };
 
-
   # Include encrypted SSH key in ISO
+  #private Key
   environment.etc."secrets/nixos_deploy_key".source = ../secrets/nixos_deploy_key;
   environment.etc."secrets/nixos_deploy_key".mode = "0600";
+  #public Key
+  environment.etc."secrets/nixos_deploy_key.pub".source = ../secrets/nixos_deploy_key.pub;
+  environment.etc."secrets/nixos_deploy_key.pub".mode = "0600";
 
   # Copy install script into the live user's home
   environment.etc."install.sh".source = ./install.sh;
@@ -71,9 +97,9 @@
       echo "Welcome to the installer!"
 
       # Ensure tmp is disk-based
-      mkdir -p /mnt/tmp
-      export TMPDIR=/mnt/tmp
-      export NIX_REMOTE_TMPDIR=/mnt/tmp
+      #mkdir -p /mnt/tmp
+      #export TMPDIR=/mnt/tmp
+      #export NIX_REMOTE_TMPDIR=/mnt/tmp
 
       read -p "Press ENTER to start installation..."
       sudo /etc/install.sh

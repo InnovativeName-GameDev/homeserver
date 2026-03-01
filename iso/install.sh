@@ -6,6 +6,7 @@ FLAKE_DIR=/mnt/root/flake
 DEFAULT_FLAKE="nginx-homeserver"
 
 mkdir -p /root/.ssh
+mkdir -p /mnt/tmp
 
 # Create legacy boot partition of 512MB
 parted /dev/sda -- mklabel msdos
@@ -36,9 +37,9 @@ mkdir -p /mnt/nix/persist/{etc/{nixos,ssh},var/{lib,log},srv}
 mount -o bind /mnt/nix/persist/etc/nixos /mnt/etc/nixos
 mount -o bind /mnt/nix/persist/var/log /mnt/var/log
 
-#sudo mkdir -p /mnt/nix/var/nix
-#sudo chown -R root:root /mnt
-#sudo chmod -R 755 /mnt
+sudo mkdir -p /mnt/nix/var/nix
+sudo chown -R root:root /mnt
+sudo chmod -R 755 /mnt
 
 if [ ! -f "$DEPLOY_KEY" ]; then
   cp /etc/secrets/nixos_deploy_key "$DEPLOY_KEY"
@@ -51,6 +52,6 @@ if [ ! -d "$FLAKE_DIR" ]; then
 fi
 
 echo "Building default flake: $DEFAULT_FLAKE"
-nixos-install --flake "$FLAKE_DIR#$DEFAULT_FLAKE" --no-root-passwd
+nixos-install --flake "$FLAKE_DIR#$DEFAULT_FLAKE" --no-root-passwd --root /mnt
 #nixos-install --flake "$FLAKE_DIR#$DEFAULT_FLAKE" --no-root-passwd --root /mnt
 #TMPDIR=/mnt/tmp nixos-install --flake /mnt/root/flake#$DEFAULT_FLAKE --no-root-passwd --root /mnt
