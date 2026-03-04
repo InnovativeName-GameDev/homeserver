@@ -2,7 +2,7 @@
   description = "My Homeserver Infrastructure with Nixos Configs";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
 
     disko = {
       url = "github:nix-community/disko";
@@ -21,12 +21,12 @@
     in
     {
       nixosConfigurations = {
-        iso = nixpkgs.lib.nixosSystem {
+        proxmox-iso = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-              <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix>
-              <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
-              ./iso/iso.nix
+            (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
+            (nixpkgs + "/nixos/modules/installer/cd-dvd/channel.nix")
+            ./iso/iso.nix
           ];
         };
 
