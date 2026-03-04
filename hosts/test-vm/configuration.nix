@@ -16,7 +16,7 @@
   networking.useDHCP = true;
 
   time.timeZone = "UTC";
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "de.UTF-8";
 
   environment.systemPackages = with pkgs; [ vim git curl ];
 }
