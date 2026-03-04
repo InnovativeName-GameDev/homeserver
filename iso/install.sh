@@ -41,10 +41,10 @@ sudo mkdir -p /mnt/nix/var/nix
 sudo chown -R root:root /mnt
 sudo chmod -R 755 /mnt
 
-if [ ! -f "$DEPLOY_KEY" ]; then
-  cp /etc/secrets/nixos_deploy_key "$DEPLOY_KEY"
-  chmod 600 "$DEPLOY_KEY"
-fi
+#if [ ! -f "$DEPLOY_KEY" ]; then
+#  cp /etc/secrets/nixos_deploy_key "$DEPLOY_KEY"
+#  chmod 600 "$DEPLOY_KEY"
+#fi
 
 if [ ! -d "$FLAKE_DIR" ]; then
   echo "Cloning flake..."

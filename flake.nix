@@ -21,14 +21,14 @@
     in
     {
       nixosConfigurations = {
-        #iso = nixpkgs.lib.nixosSystem {
-        #  inherit system;
-        #  modules = [
-        #      <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix>
-        #      <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
-        #      ./iso/iso.nix
-        #  ];
-        #};
+        iso = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+              <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix>
+              <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
+              ./iso/iso.nix
+          ];
+        };
 
         nginx-homeserver = nixpkgs.lib.nixosSystem {
           inherit system;

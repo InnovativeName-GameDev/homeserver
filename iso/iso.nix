@@ -6,6 +6,7 @@
     <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
   ];
 
+
   # Enable flakes and nix-command experimental features system-wide
   nix.settings.experimental-features = [
     "nix-command"
@@ -75,11 +76,11 @@
 
   # Include encrypted SSH key in ISO
   #private Key
-  environment.etc."secrets/nixos_deploy_key".source = ../secrets/nixos_deploy_key;
-  environment.etc."secrets/nixos_deploy_key".mode = "0600";
+  #environment.etc."secrets/nixos_deploy_key".source = ../secrets/nixos_deploy_key;
+  #environment.etc."secrets/nixos_deploy_key".mode = "0600";
   #public Key
-  environment.etc."secrets/nixos_deploy_key.pub".source = ../secrets/nixos_deploy_key.pub;
-  environment.etc."secrets/nixos_deploy_key.pub".mode = "0600";
+  #environment.etc."secrets/nixos_deploy_key.pub".source = ../secrets/nixos_deploy_key.pub;
+  #environment.etc."secrets/nixos_deploy_key.pub".mode = "0600";
 
   # Copy install script into the live user's home
   environment.etc."install.sh".source = ./install.sh;

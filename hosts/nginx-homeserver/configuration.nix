@@ -10,9 +10,17 @@
       ./hardware-configuration.nix
     ];
 
-  # Bootloader.
+  # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
+  boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda";
+  #boot.loader.grub.target = "i386-pc";
+
+  fileSystems."/" = {
+    device = "/dev/sda2";
+    fsType = "ext4";
+    autoResize = true;
+  };
 
   networking.hostName = "pve-nixos-test3"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
