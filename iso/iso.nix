@@ -1,8 +1,12 @@
-{ inputs, nixpkgs, pkgs, ... }:
+{
+  inputs,
+  nixpkgs,
+  pkgs,
+  ...
+}:
 
 {
-  imports = [];
-
+  imports = [ ];
 
   # Enable flakes and nix-command experimental features system-wide
   nix.settings.experimental-features = [
@@ -16,7 +20,12 @@
   # Enable networking
   networking.wireless.enable = false;
   networking.networkmanager.enable = true;
-  networking.nameservers = ["1.1.1.1" "1.0.0.1" "8.8.8.8" "8.8.4.4"];
+  networking.nameservers = [
+    "1.1.1.1"
+    "1.0.0.1"
+    "8.8.8.8"
+    "8.8.4.4"
+  ];
 
   networking = {
     interfaces.ens18 = {
@@ -38,22 +47,14 @@
     disko
   ];
 
-  systemd.services.autoInstall = {
-    description = "Auto-install NixOS flake";
-    wantedBy = [ "multi-user.target" ]; # ensures service runs at boot
-    serviceConfig = {
-      Type = "simple";
-      StandardOutput = "journal+console";  # show logs in console
-      StandardError = "journal+console";
-    };
-    script = ''
-      set -euxo pipefail
-      echo "Running auto-install..."
-      git clone git@github.com:InnovativeName-GameDev/homeserver.git /root/flake
-      disko --mode destroy,format,mount /root/flake/modules/vm-disko-config.nix
-      nixos-install --flake /root/flake#nginx-homeserver --no-root-passwd
-      echo "Installation complete. Rebooting..."
-      reboot
-    '';
-  };
+  # Copy install.sh into home directory
+  environment.etc."install.sh".source = ./install.sh;
+  # Optional: Make it executable
+  environment.etc."install.sh".mode = "0755";
+
+  #Just 
+  environment.etc."profile.local".text = ''
+  echo "please run \"sudo /etc/install.sh\" for installation."
+  '';
+  environment.etc."profile.local".mode = "0755";
 }

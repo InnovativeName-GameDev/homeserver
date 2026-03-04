@@ -1,4 +1,3 @@
-# disko-config.nix
 {
   disko.devices = {
     disk.main = {
@@ -10,7 +9,7 @@
 
         partitions = {
           ESP = {
-            size = "512M";
+            size = "1G";
             type = "EF00";
             content = {
               type = "filesystem";
@@ -19,12 +18,12 @@
             };
           };
 
-          nix = {
+          nixos = {
             size = "100%";
             content = {
               type = "filesystem";
               format = "ext4";
-              mountpoint = "/nix";
+              mountpoint = "/";
             };
           };
         };

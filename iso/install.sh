@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euxo pipefail
 
-FLAKE_REPO="git@github.com:InnovativeName-GameDev/homeserver.git"
+FLAKE_REPO="https://github.com/InnovativeName-GameDev/homeserver.git"
 FLAKE_DIR="/mnt/root/flake"
 HOST="nginx-homeserver"
 

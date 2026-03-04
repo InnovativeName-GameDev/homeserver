@@ -11,9 +11,10 @@
     ];
 
   # Use the GRUB 2 boot loader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  boot.loader.grub.device = "/dev/sda";
+  boot.loader.grub.enable = false;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  #boot.loader.grub.device = "/dev/sda";
   #boot.loader.grub.target = "i386-pc";
 
   fileSystems."/" = {

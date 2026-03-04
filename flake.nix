@@ -30,6 +30,15 @@
           ];
         };
 
+        test-vm = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            disko.nixosModules.disko
+            ./hosts/test-vm/configuration.nix
+            ./modules/vm-disko-config.nix
+          ];
+        };
+
         nginx-homeserver = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
