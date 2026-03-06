@@ -33,6 +33,7 @@
         test-vm = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
+            (nixpkgs + "/nixos/modules/virtualisation/qemu-vm.nix")
             disko.nixosModules.disko
             ./hosts/test-vm/configuration.nix
             ./modules/vm-disko-config.nix
@@ -43,6 +44,7 @@
           inherit system;
           modules = [
             disko.nixosModules.disko
+            (nixpkgs + "/nixos/modules/virtualisation/qemu-vm.nix")
             ./hosts/nginx-homeserver/configuration.nix
             ./modules/vm-disko-config.nix
             #./modules/nginx.nix
@@ -53,6 +55,7 @@
         nginx-relay-server = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
+            (nixpkgs + "/nixos/modules/virtualisation/qemu-vm.nix")
             ./hosts/nginx-relay-server/configuration.nix
             ./modules/nginx.nix
             ./modules/tailscale.nix

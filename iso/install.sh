@@ -2,7 +2,7 @@
 set -euxo pipefail
 
 FLAKE_REPO="https://github.com/InnovativeName-GameDev/homeserver.git"
-HOST="nginx-homeserver"
+HOST="test-vm"
 
 echo "Waiting for network..."
 until ping -c1 github.com >/dev/null 2>&1; do sleep 1; done
