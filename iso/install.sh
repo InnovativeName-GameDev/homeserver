@@ -6,9 +6,9 @@ HOSTNAME="test-vm"
 FLAKE="github:InnovativeName-GameDev/homeserver"
 
 options=("test-vm" "nginx-homeserver" "nginx-relay-server")
-select selection IN  "${options[@]}"
-do
-  HOSTNAME = $selection
+select selection in "${options[@]}"; do
+  HOSTNAME=$selection;
+  break;
 done
 
 echo "Installing NixOS for $HOSTNAME using flake $FLAKE"
