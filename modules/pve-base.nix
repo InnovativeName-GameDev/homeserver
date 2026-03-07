@@ -1,7 +1,5 @@
 ### Set some default values for proxmox vms
 {
-  throw,
-  lib,
   config,
   ...
 }:
@@ -59,9 +57,10 @@
   # Set State Version to the same version everywhere.
   system.stateVersion = "25.11";
 
-  # Nixos Jobs Configs
-  max-jobs = 1;
-  cores = 1;
+  # Nix build configuration for low-RAM VM
+  nix.settings = {
+    max-jobs = 1; # build one derivation at a time
+  };
 
   # Enable networking
   networking.wireless.enable = false;
