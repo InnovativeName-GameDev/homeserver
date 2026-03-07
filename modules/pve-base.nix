@@ -35,7 +35,6 @@
       "-L" # print build logs
     ];
     dates = "2min";
-    runGarbageCollection = true;
   };
 
   # Enable flakes and nix-command
