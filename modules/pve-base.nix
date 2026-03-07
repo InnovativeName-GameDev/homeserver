@@ -58,9 +58,8 @@
   system.stateVersion = "25.11";
 
   # Nix build configuration for low-RAM VM
-  nix.settings = {
-    max-jobs = 1; # build one derivation at a time
-  };
+  nix.settings.max-jobs = 1; # build one derivation at a time
+  nix.settings.cores = 1; # build one core at a time
 
   # Enable networking
   networking.wireless.enable = false;

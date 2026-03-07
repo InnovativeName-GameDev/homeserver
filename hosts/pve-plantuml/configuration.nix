@@ -35,12 +35,15 @@
     isNormalUser = true;
     description = "plantuml";
     extraGroups = [ "networkmanager" "wheel" ];
+    initialHashedPassword = "$6$ADWBv01H0c4VAOpm$jIKOp7G69UqoVzfccmxdH5BY/5aDaMktaubBkthj8cjA7Zo4YlaItUo93/LblsRoAqQYAZc2tnKHOW1CI1BGS1";
     #packages = with pkgs; [];
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    btop
+    neofetch
     plantuml
   ];
 

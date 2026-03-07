@@ -1,10 +1,4 @@
-{
-  inputs,
-  nixpkgs,
-  pkgs,
-  ...
-}:
-
+{ ... }:
 {
   imports = [ ];
 
@@ -23,6 +17,10 @@
 
   # Configure console keymap
   console.keyMap = "de";
+
+  # Nix build configuration for low-RAM VM
+  nix.settings.max-jobs = 1; # build one derivation at a time
+  nix.settings.cores = 1; # build one core at a time
 
   # Installed Software
   #environment.systemPackages = with pkgs; [];
