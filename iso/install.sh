@@ -38,7 +38,7 @@ mount ${DISK}1 /mnt/boot
 
 echo "Installing NixOS..."
 
-nixos-install --flake "$FLAKE#$HOSTNAME" 
+nixos-install --flake "$FLAKE#$HOSTNAME" --no-root-passwd
 
 echo "Done. The System will now automatically reboot."
 
