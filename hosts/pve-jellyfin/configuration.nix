@@ -8,7 +8,6 @@
   imports = [
     ../../modules/pve-base.nix
     ../../modules/tailscale.nix
-    ./nginx.nix
   ];
 
   #configure autoUpgrade!
