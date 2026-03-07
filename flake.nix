@@ -2,7 +2,7 @@
   description = "My Homeserver Infrastructure with Nixos Configs";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
   };
 
   outputs =
@@ -24,17 +24,45 @@
           ];
         };
 
-        test-vm = nixpkgs.lib.nixosSystem {
+        pve-nginx = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ./hosts/test-vm/configuration.nix
+            ./hosts/pve-nginx/configuration.nix
           ];
         };
 
-        pve-reverse-proxy = nixpkgs.lib.nixosSystem {
+        pve-nextcloud = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ./hosts/pve-reverse-proxy/configuration.nix
+            ./hosts/pve-nextcloud/configuration.nix
+          ];
+        };
+
+        pve-paperless-ngx = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./hosts/pve-paperless-ngx/configuration.nix
+          ];
+        };
+
+        pve-plantuml = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./hosts/pve-plantuml/configuration.nix
+          ];
+        };
+
+        pve-jenkins = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./hosts/pve-jenkins/configuration.nix
+          ];
+        };
+
+        pve-jellyfin = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./hosts/pve-jellyfin/configuration.nix
           ];
         };
 
@@ -47,6 +75,12 @@
           ];
         };
 
+        test-vm = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./hosts/test-vm/configuration.nix
+          ];
+        };
       };
     };
 }

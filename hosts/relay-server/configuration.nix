@@ -1,6 +1,12 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
+  imports = [
+    ../../modules/pve-base.nix
+    ../../modules/tailscale.nix
+    ./nginx.nix
+  ];
+
   networking.hostName = "relay-server";
 
   #configure autoUpgrade!
@@ -12,6 +18,4 @@
     enableACME = true;
     forceSSL = true;
   };
-
-  system.stateVersion = "24.05";
 }
