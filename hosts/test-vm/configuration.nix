@@ -25,7 +25,7 @@
   networking.useDHCP = true;
 
   time.timeZone = "UTC";
-  i18n.defaultLocale = "de.UTF-8";
+  i18n.defaultLocale = "de_DE.UTF-8";
 
   # Configure console keymap
   console.keyMap = "de";
