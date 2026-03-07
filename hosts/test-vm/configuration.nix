@@ -33,7 +33,6 @@
   environment.systemPackages = with pkgs; [
     git
     curl
-    qemu-guest-agent
   ];
 
   # Automatically
