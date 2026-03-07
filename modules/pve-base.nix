@@ -49,6 +49,7 @@
 
 
   # Enable networking
+  networking.wireless.enable = false;
   networking.networkmanager.enable = true;
 
   # Set your time zone.
