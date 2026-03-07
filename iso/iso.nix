@@ -42,6 +42,12 @@
     };
   };
 
+  # Define your hostname.
+  networking.hostName = "pve-nixos-test";
+
+  # Configure console keymap
+  console.keyMap = "de";
+
   environment.systemPackages = with pkgs; [
     git
     disko
@@ -52,9 +58,9 @@
   # Optional: Make it executable
   environment.etc."install.sh".mode = "0755";
 
-  #Just 
+  #Just
   environment.etc."profile.local".text = ''
-  echo "please run \"sudo /etc/install.sh\" for installation."
+    echo "please run \"sudo /etc/install.sh\" for installation."
   '';
   environment.etc."profile.local".mode = "0755";
 }
