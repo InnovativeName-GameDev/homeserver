@@ -6,9 +6,7 @@ REPO="github:InnovativeName-GameDev/homeserver"
 
 until ping -c1 github.com >/dev/null 2>&1; do sleep 1; done
 
-nix run github:nix-community/disko -- \
-  --mode destroy,format,mount \
-  "$REPO#$HOST"
+disko -- --mode destroy,format,mount "$REPO#$HOST"
 
 nixos-install --flake "$REPO#$HOST" --no-root-passwd
 

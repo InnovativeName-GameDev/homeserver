@@ -38,6 +38,8 @@
             ./hosts/test-vm/configuration.nix
             ./modules/vm-disko-config.nix
           ];
+          
+          diskoConfigurations.test-vm = import ./modules/vm-disko-config.nix;
         };
 
         nginx-homeserver = nixpkgs.lib.nixosSystem {
