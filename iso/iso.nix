@@ -15,7 +15,7 @@
   ];
 
   # Enable networking
-  networking.wireless = false;
+  networking.wireless.enable = false;
   networking.networkmanager.enable = true;
 
   # Define your hostname.
