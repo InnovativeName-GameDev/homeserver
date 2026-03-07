@@ -17,118 +17,49 @@
   networking.hostName = "pve-test-vm";
 
   # compilcation test
-  #environment.systemPackages = with pkgs; [
-  #  # --- Lightweight / CLI essentials ---
-  #  btop
-  #  htop
-  #  vim
-  #  nano
-  #  emacs
-  #  neovim
-  #  wget
-  #  curl
-  #  git
-  #  unzip
-  #  tar
-  #  gzip
-  #  bzip2
-  #  xz
-  #  tmux
-  #  screen
-  #  tree
-  #  lsof
-  #  net-tools
-  #  iproute2
-  #  jq
-  #  fd
-  #  fzf
-  #  ripgrep
-  #  bat
-  #  ncdu
-  #  socat
-  #  openssh
-  #  openssl
-  #  rsync
-  #  less
-  #  man
-  #  strace
-  #  gdb
-  #  bc
-  #  coreutils
-  #  findutils
-  #  diffutils
-  #  file
-  #  shellcheck
-  #  parallel
-  #  ethtool
-  #  iperf
-  #  wget
-  #  curl
-  #  unzip
-  #  zip
-  #  p7zip
-#
-  #  # --- Medium / developer tools ---
-  #  python3
-  #  python3Packages.numpy
-  #  python3Packages.scipy
-  #  python3Packages.matplotlib
-  #  python3Packages.pandas
-  #  python3Packages.requests
-  #  python3Packages.jinja2
-  #  nodejs
-  #  nodePackages.typescript
-  #  go
-  #  rustc
-  #  cargo
-  #  cmake
-  #  pkg-config
-  #  make
-  #  gcc
-  #  clang
-  #  autoconf
-  #  automake
-  #  gnumake
-  #  nasm
-  #  perl
-  #  ruby
-  #  lua
-  #  golang
-  #  protobuf
-  #  pkg-config
-#
-  #  # --- Medium-heavy / libraries and stress-test packages ---
-  #  haskellPackages.lens
-  #  haskellPackages.text
-  #  haskellPackages.cabal-install
-  #  ghc
-  #  llvm
-  #  emacsPackages.melpaPackages.org
-  #  python3Packages.scikit-learn
-  #  python3Packages.tensorflow
-  #  python3Packages.opencv
-  #  python3Packages.cython
-  #  nodePackages.electron
-  #  nodePackages.angular-cli
-  #  rustPackages.ripgrep
-  #  rustPackages.exa
-  #  rustPackages.fzf
-  #  goPackages.gitea
-  #  goPackages.hugo
-#
-  #  # --- Very heavy / build stress-test (expect OOM without swap) ---
-  #  ghc
-  #  llvm
-  #  haskellPackages.ghc
-  #  haskellPackages.pandoc
-  #  python3Packages.scipy
-  #  python3Packages.tensorflow
-  #  python3Packages.numpy
-  #  nodePackages.electron
-  #  rustPackages.ripgrep
-  #  rustPackages.alacritty
-  #];
   environment.systemPackages = with pkgs; [
-    btop
+    # --- Lightweight / safe ---
+    btop # system monitor
+    htop # process monitor
+    vim # text editor
+    nano # alternative lightweight editor
+    wget # HTTP client
+    curl # HTTP client
+    git # version control
+    unzip # zip extraction
+    tmux # terminal multiplexer
+    fd # fast file search
+    ripgrep # CLI search tool, builds medium
+    tree # directory listing
+    lsof # open files monitor
+    net-tools # basic networking tools
+    iproute2 # ip commands
+
+    # --- Medium RAM usage ---
+    python3 # interpreter
+    python3Packages.numpy # small C extensions
+    python3Packages.scipy # memory-heavy extensions
+    nodejs # JavaScript runtime
+    go # Go compiler
+    rustc # Rust compiler
+    cmake # build system, medium RAM
+    pkg-config # helper for C libraries
+    gcc # C compiler
+    clang # C/C++ compiler
+    ripgrep # Rust CLI tool
+    jq # JSON processor
+    fd # fast file search
+    openssh # SSH client/server
+
+    # --- Heavy / RAM-intensive (stress test packages) ---
+    ghc # Glasgow Haskell Compiler
+    emacs # builds many files, medium to heavy
+    llvm # very heavy
+    python3Packages.pandas # builds C extensions
+    python3Packages.matplotlib # builds heavy dependencies
+    nodePackages.typescript # builds TypeScript compiler from source
   ];
+  #environment.systemPackages = with pkgs; [
+  #  btop
+  #];
 }

@@ -30,6 +30,11 @@
     fsType = "vfat";
   };
 
+  # Swap
+  swapDevices = [
+    { device = "/swapfile"; size = 10240; }
+  ];
+
   # Enable automatic Updates
   system.autoUpgrade = {
     enable = true;
