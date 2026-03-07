@@ -60,6 +60,12 @@
   # Nix build configuration for low-RAM VM
   nix.settings.max-jobs = 1; # build one derivation at a time
   nix.settings.cores = 1; # build one core at a time
+  
+  # Do memory compression
+  zramSwap.enable = true;
+  #swapDevices = [
+  #  { device = "/swapfile"; size = 1024; }
+  #];
 
   # Enable networking
   networking.wireless.enable = false;
