@@ -1,5 +1,10 @@
 ### Set some default values for proxmox vms
-{ throw, lib, config, ... }:
+{
+  throw,
+  lib,
+  config,
+  ...
+}:
 {
   # Bootloader
   boot.loader.systemd-boot.enable = true;
@@ -35,9 +40,13 @@
     ];
     dates = "2min";
   };
-  system.autoUpgrade.flake = lib.mkIf config.system.autoUpgrade.enable
-    (lib.mkDefault (throw "Host must set system.autoUpgrade.flake"));
-    
+  assertions = [
+    {
+      assertion = !config.system.autoUpgrade.enable || config.system.autoUpgrade.flake != null;
+      message = "Host must set system.autoUpgrade.flake when autoUpgrade is enabled";
+    }
+  ];
+
   # Enable flakes and nix-command
   nix.settings.experimental-features = [
     "nix-command"
@@ -46,7 +55,6 @@
 
   # Set State Version to the same version everywhere.
   system.stateVersion = "25.11";
-
 
   # Enable networking
   networking.wireless.enable = false;
