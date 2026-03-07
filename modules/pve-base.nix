@@ -1,5 +1,5 @@
 ### Set some default values for proxmox vms
-{ inputs, ... }:
+{ inputs, throw, lib, ... }:
 {
   # Bootloader
   boot.loader.systemd-boot.enable = true;
@@ -30,12 +30,12 @@
   # Enable automatic Updates
   system.autoUpgrade = {
     enable = true;
-    flake = inputs.self.outPath;
     flags = [
       "-L" # print build logs
     ];
     dates = "2min";
   };
+  system.autoUpgrade.flake = lib.mkDefault (throw "Host must set system.autoUpgrade.flake");
 
   # Enable flakes and nix-command
   nix.settings.experimental-features = [
