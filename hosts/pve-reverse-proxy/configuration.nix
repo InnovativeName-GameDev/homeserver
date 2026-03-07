@@ -11,6 +11,9 @@
     ./nginx.nix
   ];
 
+  #configure autoUpgrade!
+  system.autoUpgrade.flake = "github:InnovativeName-GameDev/homeserver#pve-reverse-proxy";
+
   networking.hostName = "pve-reverse-proxy"; # Define your hostname.
 
   # Configure network proxy if necessary

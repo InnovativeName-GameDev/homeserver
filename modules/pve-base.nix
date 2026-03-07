@@ -53,6 +53,9 @@
     "flakes"
   ];
 
+  # Enable password feedback for sudo
+  security.sudo.extraConfig = "Defaults pwfeedback";
+
   # Set State Version to the same version everywhere.
   system.stateVersion = "25.11";
 
