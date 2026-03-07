@@ -1,13 +1,41 @@
 #!/usr/bin/env bash
-set -eux
+set -euo pipefail
 
-HOST="test-vm"
-REPO="github:InnovativeName-GameDev/homeserver"
+DISK="/dev/sda"
+HOSTNAME="test-vm"
 
-until ping -c1 github.com >/dev/null 2>&1; do sleep 1; done
+# Flake repo
+FLAKE="github:InnovativeName-GameDev/homeserver"
 
-disko -- --mode destroy,format,mount "$REPO#$HOST"
+echo "Installing NixOS for $HOSTNAME using flake $FLAKE"
 
-nixos-install --flake "$REPO#$HOST" --no-root-passwd
+read -p "This will wipe $DISK. Continue? (y/N): " confirm
+[[ "$confirm" == "y" ]] || exit 1
 
-reboot
+echo "Partitioning disk..."
+
+parted -s "$DISK" -- \
+ mklabel gpt \
+ mkpart ESP fat32 1MiB 512MiB \
+ name 1 ESP \
+ set 1 esp on \
+ mkpart primary ext4 512MiB 100%
+
+echo "Formatting..."
+
+mkfs.fat -F32 -n boot ${DISK}1
+mkfs.ext4 -L nixos ${DISK}2
+
+echo "Mounting..."
+
+mount ${DISK}2 /mnt
+mkdir -p /mnt/boot
+mount ${DISK}1 /mnt/boot
+
+echo "Installing NixOS..."
+
+nixos-install \
+ --flake "$FLAKE#$HOSTNAME" \
+ --no-root-passwd
+
+echo "Done. Reboot when ready."

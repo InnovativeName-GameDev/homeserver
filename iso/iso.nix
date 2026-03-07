@@ -51,6 +51,7 @@
   environment.systemPackages = with pkgs; [
     git
     disko
+    grep
   ];
 
   # Copy install.sh into home directory
@@ -58,7 +59,7 @@
   # Optional: Make it executable
   environment.etc."install.sh".mode = "0755";
 
-  #Just
+  # Add hint for the user about what todo
   environment.etc."profile.local".text = ''
     echo "please run \"sudo /etc/install.sh\" for installation."
   '';

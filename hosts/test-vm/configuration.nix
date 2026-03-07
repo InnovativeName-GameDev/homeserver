@@ -1,26 +1,55 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-  #imports = [ ./hardware-configuration.nix ];
-  imports = [
-    ../../modules/vm-disko-config.nix
-  ];
+  imports = [ ];
 
-  #boot.loader.systemd-boot.enable = true;
-  #boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.enable = true;
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.efiInstallAsRemovable = true;
+  # Enable QEMU Guest for Proxmox
+  services.qemuGuest.enable = true;
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.availableKernelModules = [
-    "virtio_pci" "virtio_scsi" "virtio_blk" "sd_mod" "sr_mod"
+    "virtio_pci"
+    "virtio_scsi"
+    "virtio_blk"
+    "sd_mod"
   ];
 
-  networking.hostName = "nginx-homeserver";
+  networking.hostName = "test-vm";
   networking.useDHCP = true;
 
   time.timeZone = "UTC";
   i18n.defaultLocale = "de.UTF-8";
 
-  environment.systemPackages = with pkgs; [ vim git curl ];
+  # Configure console keymap
+  console.keyMap = "de";
+
+  environment.systemPackages = with pkgs; [
+    git
+    curl
+    qemu-guest-agent
+  ];
+
+  # Automatically
+  boot.growPartition = true;
+
+  # Default filesystem
+  fileSystems."/" = {
+    device = "/dev/disk/by-label/nixos";
+    fsType = "ext4";
+    autoResize = true;
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-label/boot";
+    fsType = "vfat";
+  };
+
+  system.stateVersion = "25.05";
 }

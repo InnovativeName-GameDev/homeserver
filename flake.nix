@@ -38,7 +38,6 @@
           ];
 
         };
-        diskoConfigurations.test-vm = import ./modules/vm-disko-config.nix {};
 
         nginx-homeserver = nixpkgs.lib.nixosSystem {
           inherit system;
