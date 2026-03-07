@@ -36,7 +36,7 @@
     flags = [
       "-L" # print build logs
     ];
-    dates = "2min";
+    dates = [ "*-*-* *:*:00/300" ]; # Every 5 minutes
   };
   assertions = [
     {
@@ -60,7 +60,7 @@
   # Nix build configuration for low-RAM VM
   nix.settings.max-jobs = 1; # build one derivation at a time
   nix.settings.cores = 1; # build one core at a time
-  
+
   # Do memory compression
   zramSwap.enable = true;
   #swapDevices = [
