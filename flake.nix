@@ -3,18 +3,12 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
     {
       self,
       nixpkgs,
-      disko,
     }:
     let
       system = "x86_64-linux";
@@ -37,23 +31,17 @@
           ];
         };
 
-        nginx-homeserver = nixpkgs.lib.nixosSystem {
+        pve-reverse-proxy = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            disko.nixosModules.disko
-            (nixpkgs + "/nixos/modules/virtualisation/qemu-vm.nix")
-            ./hosts/nginx-homeserver/configuration.nix
-            ./modules/vm-disko-config.nix
-            #./modules/nginx.nix
-            #./modules/tailscale.nix
+            ./hosts/pve-reverse-proxy/configuration.nix
           ];
         };
 
-        nginx-relay-server = nixpkgs.lib.nixosSystem {
+        relay-server = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            (nixpkgs + "/nixos/modules/virtualisation/qemu-vm.nix")
-            ./hosts/nginx-relay-server/configuration.nix
+            ./hosts/relay-server/configuration.nix
             ./modules/nginx.nix
             ./modules/tailscale.nix
           ];

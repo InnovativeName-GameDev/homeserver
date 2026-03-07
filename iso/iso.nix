@@ -43,15 +43,13 @@
   };
 
   # Define your hostname.
-  networking.hostName = "pve-nixos-test";
+  networking.hostName = "pve-nixos-installer";
 
   # Configure console keymap
   console.keyMap = "de";
 
-  environment.systemPackages = with pkgs; [
-    git
-    disko
-  ];
+  # Installed Software
+  #environment.systemPackages = with pkgs; [];
 
   # Copy install.sh into home directory
   environment.etc."install.sh".source = ./install.sh;

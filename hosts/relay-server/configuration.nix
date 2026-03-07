@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  networking.hostName = "nginx-relay-server";
+  networking.hostName = "relay-server";
 
   services.nginx.virtualHosts."example2.com" = {
     root = "/var/www/example2";

@@ -5,7 +5,7 @@ DISK="/dev/sda"
 HOSTNAME="test-vm"
 FLAKE="github:InnovativeName-GameDev/homeserver"
 
-options=("test-vm" "nginx-homeserver" "nginx-relay-server")
+options=("test-vm" "pve-reverse-proxy" "nginx-relay-server")
 select selection in "${options[@]}"; do
   HOSTNAME=$selection;
   break;
