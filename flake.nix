@@ -33,10 +33,8 @@
         test-vm = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            (nixpkgs + "/nixos/modules/virtualisation/qemu-vm.nix")
             disko.nixosModules.disko
             ./hosts/test-vm/configuration.nix
-            ./modules/vm-disko-config.nix
           ];
 
         };

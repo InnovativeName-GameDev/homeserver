@@ -1,12 +1,16 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ];
+  #imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ../../modules/vm-disko-config.nix
+  ];
 
+  #boot.loader.systemd-boot.enable = true;
+  #boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.enable = true;
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.efiInstallAsRemovable = true;
-  boot.loader.grub.device = "nodev"; # UEFI uses ESP
 
   boot.initrd.availableKernelModules = [
     "virtio_pci" "virtio_scsi" "virtio_blk" "sd_mod" "sr_mod"
