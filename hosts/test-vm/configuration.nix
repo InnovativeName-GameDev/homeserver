@@ -17,6 +17,4 @@
   environment.systemPackages = with pkgs; [
     btop
   ];
-
-  system.stateVersion = "25.05";
 }

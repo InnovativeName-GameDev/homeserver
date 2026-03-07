@@ -17,13 +17,13 @@
   # Enable networking
   networking.wireless.enable = false;
   networking.networkmanager.enable = true;
+  networking.networkmanager.dhcp = true;
   networking.nameservers = [
     "1.1.1.1"
     "1.0.0.1"
     "8.8.8.8"
     "8.8.4.4"
   ];
-  networking.useDHCP = true;
 
   # Define your hostname.
   networking.hostName = "pve-nixos-installer";
