@@ -14,9 +14,6 @@
     "flakes"
   ];
 
-  boot.loader.grub.enable = false;
-  services.openssh.enable = true;
-
   # Enable networking
   networking.wireless.enable = false;
   networking.networkmanager.enable = true;
@@ -26,21 +23,7 @@
     "8.8.8.8"
     "8.8.4.4"
   ];
-
-  networking = {
-    interfaces.ens18 = {
-      ipv4.addresses = [
-        {
-          address = "192.168.178.250";
-          prefixLength = 24;
-        }
-      ];
-    };
-    defaultGateway = {
-      address = "192.168.178.1";
-      interface = "ens18";
-    };
-  };
+  networking.useDHCP = true;
 
   # Define your hostname.
   networking.hostName = "pve-nixos-installer";
