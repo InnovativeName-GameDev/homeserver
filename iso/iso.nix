@@ -15,7 +15,6 @@
   ];
 
   # Enable networking
-  networking.wireless.enable = false;
   networking.networkmanager.enable = true;
   networking.nameservers = [
     "1.1.1.1"
