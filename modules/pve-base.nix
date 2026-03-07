@@ -59,6 +59,10 @@
   # Set State Version to the same version everywhere.
   system.stateVersion = "25.11";
 
+  # Nixos Jobs Configs
+  max-jobs = 1;
+  cores = 1;
+
   # Enable networking
   networking.wireless.enable = false;
   networking.networkmanager.enable = true;
@@ -89,5 +93,8 @@
 
   # Set default password for the root user
   users.users.root.hashedPassword = "$6$ADWBv01H0c4VAOpm$jIKOp7G69UqoVzfccmxdH5BY/5aDaMktaubBkthj8cjA7Zo4YlaItUo93/LblsRoAqQYAZc2tnKHOW1CI1BGS1";
+
+  # Disable Unneeded Services
+  services.xserver.enable = false;
 
 }
