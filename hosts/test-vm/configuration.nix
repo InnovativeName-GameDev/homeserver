@@ -10,7 +10,8 @@
     ../../modules/pve-base.nix
   ];
 
-  #system.autoUpgrade.flake = "github:InnovativeName-GameDev/homeserver#test-vm";
+  #configure autoUpgrade!
+  system.autoUpgrade.flake = "github:InnovativeName-GameDev/homeserver#test-vm";
 
   #Network
   networking.hostName = "pve-test-vm";
