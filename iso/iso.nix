@@ -51,7 +51,6 @@
   environment.systemPackages = with pkgs; [
     git
     disko
-    grep
   ];
 
   # Copy install.sh into home directory
