@@ -3,9 +3,13 @@ set -euo pipefail
 
 DISK="/dev/sda"
 HOSTNAME="test-vm"
-
-# Flake repo
 FLAKE="github:InnovativeName-GameDev/homeserver"
+
+options = ("test-vm" "nginx-homeserver" "nginx-relay-server")
+select selection IN  "${options[@]}"
+do
+  HOSTNAME = $selection
+done
 
 echo "Installing NixOS for $HOSTNAME using flake $FLAKE"
 
@@ -34,8 +38,8 @@ mount ${DISK}1 /mnt/boot
 
 echo "Installing NixOS..."
 
-nixos-install \
- --flake "$FLAKE#$HOSTNAME" \
- --no-root-passwd
+nixos-install --flake "$FLAKE#$HOSTNAME" 
 
-echo "Done. Reboot when ready."
+echo "Done. The System will now automatically reboot."
+
+reboot
