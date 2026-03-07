@@ -32,7 +32,10 @@
 
   # Swap
   swapDevices = [
-    { device = "/swapfile"; size = 10240; }
+    {
+      device = "/swapfile";
+      size = 10240;
+    }
   ];
 
   # Enable automatic Updates
@@ -41,7 +44,8 @@
     flags = [
       "-L" # print build logs
     ];
-    dates = "hourly";
+    #    dates = "hourly";
+    dates = "*:0/5"; # every 5 minutes
   };
   assertions = [
     {
@@ -68,9 +72,6 @@
 
   # Do memory compression
   zramSwap.enable = true;
-  #swapDevices = [
-  #  { device = "/swapfile"; size = 1024; }
-  #];
 
   # Enable networking
   networking.wireless.enable = false;
