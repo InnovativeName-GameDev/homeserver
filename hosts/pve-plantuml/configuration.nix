@@ -43,6 +43,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     btop
+    htop
     neofetch
     plantuml
   ];
