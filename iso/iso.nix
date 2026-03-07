@@ -16,7 +16,7 @@
 
   # Nixos Jobs Configs
   max-jobs = 1;
-  max-cores = 1;
+  cores = 1;
 
 
   # Enable networking
