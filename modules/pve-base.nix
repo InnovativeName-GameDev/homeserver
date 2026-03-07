@@ -36,7 +36,7 @@
     flags = [
       "-L" # print build logs
     ];
-    dates = [ "*-*-* *:*:00/120" ]; # every 120 seconds → every 2 minutes
+    dates = "hourly";
   };
   assertions = [
     {
