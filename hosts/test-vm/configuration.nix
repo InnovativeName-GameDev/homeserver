@@ -12,7 +12,6 @@
 
   #Network
   networking.hostName = "pve-test-vm";
-  networking.useDHCP = true;
 
   environment.systemPackages = with pkgs; [
     btop
