@@ -81,6 +81,24 @@
     suwayomi-server
   ];
 
+    # Generate a random password at boot if it doesn't exist
+  systemd.services.generate-nextcloud-admin-pass = {
+    description = "Generate Nextcloud admin password (test)";
+    wantedBy = [ "multi-user.target" ];
+    before = [ "nextcloud-setup.service" ];
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+    };
+    script = ''
+      install -m 0700 -d /run/secrets
+      if [ ! -f /run/secrets/nextcloud-admin-pass ]; then
+        ${pkgs.openssl}/bin/openssl rand -base64 24 > /run/secrets/nextcloud-admin-pass
+        chmod 600 /run/secrets/nextcloud-admin-pass
+      fi
+    '';
+  };
+
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud31;
@@ -88,12 +106,14 @@
     datadir = "/srv/nextcloud";
 
     config = {
+      adminuser = "admin";
+      adminpassFile = "/run/secrets/nextcloud-admin-pass";
+
       dbtype = "pgsql";
       dbuser = "nextcloud";
       dbhost = "/run/postgresql";
       dbname = "nextcloud";
     };
-
     settings = {
       trusted_domains = [ "cloud.innovativename.xyz" ];
       trusted_proxies = [ "127.0.0.1" ];
