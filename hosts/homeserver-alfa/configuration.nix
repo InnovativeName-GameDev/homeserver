@@ -71,11 +71,10 @@
     plantuml-server
     jenkins
     jellyfin
-    ollama
     suwayomi-server
   ];
 
-    # Generate a random password at boot if it doesn't exist
+  # Generate a random password at boot if it doesn't exist
   systemd.services.generate-nextcloud-admin-pass = {
     description = "Generate Nextcloud admin password (test)";
     wantedBy = [ "multi-user.target" ];
@@ -254,7 +253,6 @@
     initialEmail = "ds";
     initialPasswordFile = "/run/secrets/nextcloud-admin-pass";
 
-
     settings = {
       PGADMIN_LISTEN_ADDRESS = "127.0.0.1";
       PGADMIN_LISTEN_PORT = 5050;
@@ -284,4 +282,36 @@
       protected-mode = "no";
     };
   };
+
+  virtualisation.oci-containers.containers = {
+    open-webui = {
+      image = "ghcr.io/open-webui/open-webui:v0.4.5"; # Pinned to stable version
+      ports = [ "3000:8080" ];
+      extraOptions = [ "--add-host=host.docker.internal:host-gateway" ];
+    };
+
+    searxng = {
+      image = "searxng/searxng:latest";
+      ports = [ "8888:8080" ];
+    };
+  };
+
+  services.ollama = {
+    enable = true;
+    openFirewall = false;
+    host = "127.0.0.1";
+    port = 11434;
+  };
+
+  virtualisation.oci-containers.containers = {
+    immich-server = {
+      image = "ghcr.io/immich-app/immich-server:release";
+      extraOptions = [ "--network=host" ];
+    };
+
+    immich-machine-learning = {
+      image = "ghcr.io/immich-app/immich-machine-learning:release";
+    };
+  };
+
 }
