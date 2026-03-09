@@ -24,6 +24,13 @@
           ];
         };
 
+        homeserver-alfa = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./hosts/homeserver-alfa/configuration.nix
+          ];
+        };
+
         pve-nginx = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
