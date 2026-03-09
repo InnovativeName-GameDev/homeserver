@@ -222,6 +222,9 @@
     perl
     perlPackages.Mojolicious
   ];
+  environment.variables = {
+    NIXPKGS_ALLOW_INSECURE=1
+  };
 
   nixpkgs.config.allowUnfree = true;
 
