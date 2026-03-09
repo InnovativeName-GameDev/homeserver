@@ -316,8 +316,9 @@
 
   nixpkgs.overlays = [
     (final: prev: {
-      paperless-ngx = prev.paperless-ngx.overrideAttrs (old: {
+      paperless-ngx = prev.paperless-ngx.overrideAttrs (_: {
         doCheck = false;
+        checkPhase = "true";
       });
     })
   ];
