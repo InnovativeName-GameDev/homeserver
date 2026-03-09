@@ -225,7 +225,6 @@
 
   # Lightweight HTTP servers
   services.nginx.enable = true;
-  #services.apacheHttpd.enable = true;
   services.plantuml-server.enable = true;
   services.suwayomi-server.enable = true;
 
@@ -233,12 +232,7 @@
   services.prometheus.enable = true;
   services.grafana.enable = true;
 
-  # Containers (works without running any images)
-  #services.docker.enable = true;
-  #services.podman.enable = true;
-
   # Other fun or small servers
-  #services.cowsay.enable = true;
   services.dnsmasq.enable = true;
   services.cron.enable = true;
   services.rsyncd.enable = true;
