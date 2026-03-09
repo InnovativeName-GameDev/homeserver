@@ -149,7 +149,7 @@
   services.paperless.enable = true;
   services.jellyfin.enable = true;
   services.immich.enable = true;
-  services.authentik.enable = true;
+  #services.authentik.enable = true;
   services.minio.enable = true;
   services.syncthing.enable = true;
   services.keycloak.enable = true;
