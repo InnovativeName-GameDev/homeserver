@@ -143,7 +143,7 @@
   services.suwayomi-server.enable = true;
   services.prometheus.enable = true;
   services.grafana.enable = true;
-  services.docker.enable = true;
+  #services.docker.enable = true;
   services.podman.enable = true;
   services.nextcloud.enable = true;
   services.paperless.enable = true;
