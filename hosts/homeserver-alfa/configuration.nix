@@ -67,7 +67,7 @@
     btop
     neofetch
     nginx
-    nextcloud31
+    nextcloud32
     paperless-ngx
     plantuml
     plantuml-server
@@ -97,7 +97,7 @@
 
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud31;
+    package = pkgs.nextcloud32;
     hostName = "cloud.innovativename.xyz";
     datadir = "/srv/nextcloud";
 
