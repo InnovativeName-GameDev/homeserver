@@ -314,4 +314,12 @@
     };
   };
 
+  nixpkgs.overlays = [
+    (final: prev: {
+      paperless-ngx = prev.paperless-ngx.overrideAttrs (old: {
+        doCheck = false;
+      });
+    })
+  ];
+
 }
