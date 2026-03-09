@@ -144,7 +144,7 @@
   services.prometheus.enable = true;
   services.grafana.enable = true;
   #services.docker.enable = true;
-  services.podman.enable = true;
+  #services.podman.enable = true;
   services.nextcloud.enable = true;
   services.paperless.enable = true;
   services.jellyfin.enable = true;
@@ -155,6 +155,8 @@
   services.keycloak.enable = true;
   services.openvpn.enable = true;
   services.wireguard.enable = true;
+  services.tailscale.enable = true;
+  services.minecraft-server.enable = true;
 
   /*
   # 1️⃣ Nextcloud (pulls PHP, databases, image libraries)
