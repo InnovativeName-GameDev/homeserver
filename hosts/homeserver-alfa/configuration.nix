@@ -33,7 +33,7 @@
   security.sudo.extraConfig = "Defaults pwfeedback";
 
   # Set State Version to the same version everywhere.
-  system.stateVersion = "25.00";
+  system.stateVersion = "25.05";
 
   # Enable networking
   networking.wireless.enable = false;
