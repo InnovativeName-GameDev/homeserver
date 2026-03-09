@@ -236,7 +236,6 @@
   services.dnsmasq.enable = true;
   services.cron.enable = true;
   services.rsyncd.enable = true;
-  services.openvpn.enable = false; # can be left disabled for test
 
   #services.apacheHttpd.enable = true;
   services.mysql.enable = true;
@@ -258,6 +257,7 @@
   #services.wireguard.enable = true;
   services.tailscale.enable = true;
   services.minecraft-server.enable = true;
+  services.minecraft-server.eula = true;
 
   # 1️⃣ Nextcloud (pulls PHP, databases, image libraries)
   services.nextcloud = {
