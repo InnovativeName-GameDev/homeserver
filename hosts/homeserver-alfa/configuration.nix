@@ -238,7 +238,7 @@
   #services.podman.enable = true;
 
   # Other fun or small servers
-  services.cowsay.enable = true;
+  #services.cowsay.enable = true;
   services.dnsmasq.enable = true;
   services.cron.enable = true;
   services.rsyncd.enable = true;
