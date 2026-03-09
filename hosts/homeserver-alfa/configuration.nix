@@ -129,9 +129,121 @@
     minio
     syncthing
     keycloak
+    btop
+    neofetch
+    htop
+    vim
+    nano
+    git
+    wget
+    curl
+    jq
+    tree
+    tmux
+    ripgrep
+    fd
+    fzf
+    bat
+    docker # can run but won’t break if no containers yet
+    podman
+    podman-compose
+    docker-compose
+    python3
+    nodejs
+    npm
+    go
+    openjdk
+    gradle
+    maven
+    rustup
+    nginx # can run immediately
+    apacheHttpd # minimal start
+    plantuml-server
+    suwayomi-server
+    prometheus # minimal start
+    grafana # minimal start
+    nmap
+    tcpdump
+    netcat
+    wireshark
+    ffmpeg
+    vlc
+    mpv
+    tmux
+    tree
+    htop
+    btop
+    neofetch
+    tree
+    tmux
+    screen
+    nano
+    vim
+    emacs
+    micro
+    git
+    gh # GitHub CLI
+    curl
+    wget
+    jq
+    fzf
+    fd
+    ripgrep
+    bat
+    exa
+    hexyl
+    yq
+    openssh
+    rsync
+    aria2
+    ncdu
+    unzip
+    p7zip
+    zip
+    docker
+    podman
+    podman-compose
+    docker-compose
+    python3
+    python3Packages.pip
+    nodejs
+    npm
+    go
+    rustup
+    openjdk
+    maven
+    gradle
+    ghc # Haskell
+    cabal-install
+    lua
+    luarocks
+    ruby
+    bundler
+    perl
+    perlPackages.Mojolicious
   ];
 
+  # Lightweight HTTP servers
   services.nginx.enable = true;
+  #services.apacheHttpd.enable = true;
+  services.plantuml-server.enable = true;
+  services.suwayomi-server.enable = true;
+
+  # Monitoring / dashboards (default config works)
+  services.prometheus.enable = true;
+  services.grafana.enable = true;
+
+  # Containers (works without running any images)
+  #services.docker.enable = true;
+  #services.podman.enable = true;
+
+  # Other fun or small servers
+  services.cowsay.enable = true;
+  services.dnsmasq.enable = true;
+  services.cron.enable = true;
+  services.rsyncd.enable = true;
+  services.openvpn.enable = false; # can be left disabled for test
+
   #services.apacheHttpd.enable = true;
   services.mysql.enable = true;
   services.postgresql.enable = true;
@@ -139,10 +251,6 @@
   services.mongodb.enable = true;
   services.rabbitmq.enable = true;
   services.jenkins.enable = true;
-  services.plantuml-server.enable = true;
-  services.suwayomi-server.enable = true;
-  services.prometheus.enable = true;
-  services.grafana.enable = true;
   #services.docker.enable = true;
   #services.podman.enable = true;
   #services.nextcloud.enable = true;
@@ -153,7 +261,6 @@
   services.minio.enable = true;
   services.syncthing.enable = true;
   #services.keycloak.enable = true;
-  services.openvpn.enable = true;
   #services.wireguard.enable = true;
   services.tailscale.enable = true;
   services.minecraft-server.enable = true;
