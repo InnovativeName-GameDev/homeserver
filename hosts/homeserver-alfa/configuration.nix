@@ -113,11 +113,26 @@
     tcpdump
     netcat
     wireshark
-    vimPlugins.vim-airline
-    vimPlugins.nerdtree
+    ffmpeg
+    vlc
+    mpv
+    kodi
+    nextcloud-client
+    paperless-ngx
+    jellyfin
+    immich
+    authentik
+    borgbackup
+    restic
+    openvpn
+    wireguard
+    minio
+    syncthing
+    keycloak
   ];
 
   services.nginx.enable = true;
+  services.apacheHttpd.enable = true;
   services.mysql.enable = true;
   services.postgresql.enable = true;
   services.redis.servers.shared.enable = true;
@@ -130,7 +145,18 @@
   services.grafana.enable = true;
   services.docker.enable = true;
   services.podman.enable = true;
+  services.nextcloud.enable = true;
+  services.paperless.enable = true;
+  services.jellyfin.enable = true;
+  services.immich.enable = true;
+  services.authentik.enable = true;
+  services.minio.enable = true;
+  services.syncthing.enable = true;
+  services.keycloak.enable = true;
+  services.openvpn.enable = true;
+  services.wireguard.enable = true;
 
+  /*
   # 1️⃣ Nextcloud (pulls PHP, databases, image libraries)
   services.nextcloud = {
     enable = true;
@@ -190,6 +216,7 @@
       chmod 600 /run/secrets/test-nextcloud-pass
     '';
   };
+  */
 
   virtualisation.docker = {
     enable = true;
