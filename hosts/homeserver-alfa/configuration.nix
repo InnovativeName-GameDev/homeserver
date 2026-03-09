@@ -258,6 +258,8 @@
   services.pgadmin = {
     enable = true;
     initialEmail = "ds";
+    initialPasswordFile = "/run/secrets/nextcloud-admin-pass";
+
 
     settings = {
       PGADMIN_LISTEN_ADDRESS = "127.0.0.1";
