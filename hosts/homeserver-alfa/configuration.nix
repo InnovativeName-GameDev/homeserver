@@ -17,15 +17,11 @@
   #boot.growPartition = true;
 
   # filesystem
-  #fileSystems."/" = {
-  #  device = "/dev/disk/by-label/nixos";
-  #  fsType = "ext4";
-  #  autoResize = true;
-  #};
-  #fileSystems."/boot" = {
-  #  device = "/dev/disk/by-label/boot";
-  #  fsType = "vfat";
-  #};
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/5747bb17-1996-43f2-a20b-c1a83e8e422f";
+    fsType = "ext4";
+    autoResize = true;
+  };
 
   # Enable flakes and nix-command
   nix.settings.experimental-features = [
