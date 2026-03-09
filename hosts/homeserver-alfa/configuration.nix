@@ -118,7 +118,6 @@
   ];
 
   services.nginx.enable = true;
-  services.apacheHttpd.enable = true;
   services.mysql.enable = true;
   services.postgresql.enable = true;
   services.redis.servers.shared.enable = true;
