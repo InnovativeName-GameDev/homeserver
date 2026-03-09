@@ -223,6 +223,8 @@
     perlPackages.Mojolicious
   ];
 
+  nixpkgs.config.allowUnfree = true;
+
   # Lightweight HTTP servers
   services.nginx.enable = true;
   services.plantuml-server.enable = true;
