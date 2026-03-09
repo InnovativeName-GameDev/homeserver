@@ -71,7 +71,7 @@
     btop
     neofetch
     nginx
-    nextcloud31
+    #nextcloud31
     paperless-ngx
     plantuml
     plantuml-server
