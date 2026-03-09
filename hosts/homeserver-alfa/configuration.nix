@@ -33,7 +33,7 @@
   security.sudo.extraConfig = "Defaults pwfeedback";
 
   # Set State Version to the same version everywhere.
-  system.stateVersion = "25.11";
+  system.stateVersion = "25.00";
 
   # Enable networking
   networking.wireless.enable = false;
@@ -67,8 +67,6 @@
     btop
     neofetch
     nginx
-    nextcloud32
-    paperless-ngx
     plantuml
     plantuml-server
     jenkins
@@ -177,7 +175,7 @@
     consumptionDir = "/srv/paperless/consume";
 
     settings = {
-      PAPERLESS_OCR_LANGUAGE = "eng";
+      PAPERLESS_OCR_LANGUAGE = "eng+deu";
       PAPERLESS_TIME_ZONE = "Europe/Amsterdam";
       PAPERLESS_ADMIN_USER = "meow";
       PAPERLESS_DBHOST = "/run/postgresql";
