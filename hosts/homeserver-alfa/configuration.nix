@@ -154,7 +154,7 @@
   services.syncthing.enable = true;
   services.keycloak.enable = true;
   services.openvpn.enable = true;
-  services.wireguard.enable = true;
+  #services.wireguard.enable = true;
   services.tailscale.enable = true;
   services.minecraft-server.enable = true;
 
