@@ -190,10 +190,6 @@
     enable = true;
     package = pkgs.postgresql_16;
 
-    extraPlugins = with pkgs.postgresql16Packages; [
-      pgvector
-    ];
-
     # Store database on shared disk
     dataDir = "/srv/postgresql/16";
 
