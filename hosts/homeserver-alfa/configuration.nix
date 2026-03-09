@@ -132,7 +132,7 @@
   ];
 
   services.nginx.enable = true;
-  services.apacheHttpd.enable = true;
+  #services.apacheHttpd.enable = true;
   services.mysql.enable = true;
   services.postgresql.enable = true;
   services.redis.servers.shared.enable = true;
@@ -191,7 +191,30 @@
 
   # 3️⃣ Jellyfin (media server, pulls ffmpeg and lots of codecs)
   services.jellyfin = {
-    enable = true;
+    enable = true;services.nginx.enable = true;
+services.apacheHttpd.enable = true;
+services.mysql.enable = true;
+services.postgresql.enable = true;
+services.redis.servers.shared.enable = true;
+services.mongodb.enable = true;
+services.rabbitmq.enable = true;
+services.jenkins.enable = true;
+services.plantuml-server.enable = true;
+services.suwayomi-server.enable = true;
+services.prometheus.enable = true;
+services.grafana.enable = true;
+services.docker.enable = true;
+services.podman.enable = true;
+services.nextcloud.enable = true;
+services.paperless.enable = true;
+services.jellyfin.enable = true;
+services.immich.enable = true;
+services.authentik.enable = true;
+services.minio.enable = true;
+services.syncthing.enable = true;
+services.keycloak.enable = true;
+services.openvpn.enable = true;
+services.wireguard.enable = true;
     user = "media";
     group = "media";
     dataDir = "/srv/jellyfin";
