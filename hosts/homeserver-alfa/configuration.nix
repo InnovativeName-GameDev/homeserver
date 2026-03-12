@@ -63,17 +63,17 @@
   users.users.root.hashedPassword = "$6$ADWBv01H0c4VAOpm$jIKOp7G69UqoVzfccmxdH5BY/5aDaMktaubBkthj8cjA7Zo4YlaItUo93/LblsRoAqQYAZc2tnKHOW1CI1BGS1";
 
   environment.systemPackages = with pkgs; [
-    jetbrains.clion
-    jetbrains.webstorm
-    jetbrains.rust-rover
-    jetbrains.ruby-mine
-    jetbrains.rider
-    jetbrains.phpstorm
-    jetbrains.mps
-    jetbrains.goland
-    jetbrains.dataspell
-    jetbrains.datagrip
-    emacsPackages.jetbrains
+    #jetbrains.clion
+    #jetbrains.webstorm
+    #jetbrains.rust-rover
+    #jetbrains.ruby-mine
+    #jetbrains.rider
+    #jetbrains.phpstorm
+    #jetbrains.mps
+    #jetbrains.goland
+    #jetbrains.dataspell
+    #jetbrains.datagrip
+    #emacsPackages.jetbrains
     aircrack-ng
     ansible
     ant
