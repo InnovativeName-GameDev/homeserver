@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda"; # Install GRUB to the disk
   boot.loader.grub.useOSProber = false;
   boot.loader.grub.zfsSupport = true;
@@ -21,7 +20,7 @@
   # note: for initial setup run:
   boot.zfs.pools = {
     # Name of the pool
-    data = {
+    data = { #if the disk structure changes please also change the activation script below
       # For a single-disk pool:
       devices = [ "/dev/sdb" ];
 
