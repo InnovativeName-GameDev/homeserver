@@ -15,7 +15,15 @@
   };
 
   #configure autoUpgrade!
-  #system.autoUpgrade.flake = "github:InnovativeName-GameDev/homeserver#homeserver-alfa";
+  system.autoUpgrade = {
+    enable = true;
+    flake = "github:InnovativeName-GameDev/homeserver#homeserver-alfa";
+    flags = [
+      "-L" # print build logs
+    ];
+    dates = "02:00";
+    randomizedDelaySec = "45min";
+  };
 
 
   # Enable password feedback for sudo
