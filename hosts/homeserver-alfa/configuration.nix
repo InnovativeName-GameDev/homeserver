@@ -9,6 +9,7 @@
   #Networking
   networking = {
     hostName = "homeserver-alfa";
+    hostId = "00000001";
     networkmanager = {
       enable = true;
     };

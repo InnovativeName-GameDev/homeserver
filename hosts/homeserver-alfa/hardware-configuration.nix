@@ -1,4 +1,3 @@
-### Set some default values for proxmox vms
 { pkgs, ... }:
 {
   boot.loader.grub.enable = true;
@@ -7,20 +6,7 @@
   boot.loader.grub.useOSProber = false;
   boot.loader.grub.zfsSupport = true;
 
-
-  #boot = {
-  #  # Use the latest linux kernel
-  #  kernelPackages = pkgs.linuxPackages_latest;
-  #  # Grub bootloader stuff, no need to change this.
- #   loader = {
- #     efi.canTouchEfiVariables = true;
-  #    grub = {
-  #      enable = true;
-  #      efiSupport = true;
-  #      device = "nodev";
-  #    };
-  #  };
-  #};
+  boot.supportedFilesystems = [ "zfs" ];
 
   # Minimal filesystem setup (root only)
   fileSystems."/" = {
@@ -28,21 +14,31 @@
     fsType = "ext4";
   };
 
-  #zfs pool for service data
-  boot.supportedFilesystems = [ "zfs" ];
+  # Limit zfs arc size (optimal would be 1 GB per TB but thats currently not possible) 
+  # Set to 2 GiB
+  # boot.kernelParams = [ "zfs.zfs_arc_max=2147483648" ];
 
-  #limit zfs arc size (optimal would be 1 GB per TB but thats currently not possible)
-  boot.kernelParams = [ "zfs.zfs_arc_max=2147483648" ];
+  boot.zfs.pools = {
+    # Name of the pool
+    data = {
+      # For a single-disk pool:
+      devices = [ "/dev/sdb" ];
 
-  boot.zfs.pools."data" = {
-    # specify the vdevs
-    # start with a single disk, can expand later
-    devices = [ "/dev/sdb" ];
-    mountpoint = "/srv";  # mount directly
-    # optional settings
-    autoScrub.enable = true;
-    compression = "lz4";
-    atime = false;
+      # For a RAID1 mirror:
+      # devices = [{ type = "mirror"; devices = [ "/dev/sdb" "/dev/sdc" ]; }];
+
+      # For RAID10 (mirrored pairs):
+      #devices = [
+      #  { type = "mirror"; devices = [ "/dev/sdb" "/dev/sdc" ]; }
+      #  { type = "mirror"; devices = [ "/dev/sdd" "/dev/sde" ]; }
+      #];
+
+      # Pool properties
+      mountpoint = "/srv";      # where to mount the pool
+      autoScrub.enable = true;  # automatic scrub
+      compression = "lz4";      # fast compression
+      atime = false;            # don’t update access time (performance)
+    };
   };
 
   # Kernel modules for VirtualBox
