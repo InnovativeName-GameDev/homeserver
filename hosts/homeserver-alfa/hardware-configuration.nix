@@ -18,6 +18,7 @@
   # Set to 2 GiB
   # boot.kernelParams = [ "zfs.zfs_arc_max=2147483648" ];
 
+  # note: for initial setup run:
   boot.zfs.pools = {
     # Name of the pool
     data = {
@@ -40,6 +41,16 @@
       atime = false;            # don’t update access time (performance)
     };
   };
+  # note: if the pool changes also update the activation script:
+  system.activationScripts.createZfsPool = ''
+    if ! zpool list data >/dev/null 2>&1; then
+      echo "Creating ZFS pool data..."
+      zpool create -f data /dev/sdb
+      zfs set mountpoint=/srv data
+      zfs set compression=lz4 data
+      zfs set atime=off data
+    fi
+  '';
 
   # Kernel modules for VirtualBox
   boot.kernelModules = [
