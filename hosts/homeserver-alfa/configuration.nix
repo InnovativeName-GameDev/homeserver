@@ -1,15 +1,22 @@
-### Set some default values for proxmox vms
 { pkgs, ... }:
 {
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
   # Enable flakes and nix-command
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
+
+  #Networking
+  networking = {
+    hostName = "homeserver-alfa";
+    networkmanager = {
+      enable = true;
+    };
+  };
+
+  #configure autoUpgrade!
+  #system.autoUpgrade.flake = "github:InnovativeName-GameDev/homeserver#homeserver-alfa";
+
 
   # Enable password feedback for sudo
   security.sudo.extraConfig = "Defaults pwfeedback";
@@ -48,27 +55,6 @@
   ];
 
   nixpkgs.config.allowUnfree = true;
-
-  #configure autoUpgrade!
-  system.autoUpgrade.flake = "github:InnovativeName-GameDev/homeserver#homeserver-alfa";
-
-  networking.hostName = "homeserver-alfa"; # Define your hostname.
-
-  #networking
-  networking = {
-    interfaces.ens18 = {
-      ipv4.addresses = [
-        {
-          address = "192.168.178.250";
-          prefixLength = 24;
-        }
-      ];
-    };
-    defaultGateway = {
-      address = "192.168.178.1";
-#      interface = "ens18";
-    };
-  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.plantuml = {
