@@ -366,18 +366,18 @@
   services.minecraft-server.eula = true;
 
   # 1️⃣ Nextcloud (pulls PHP, databases, image libraries)
-  services.nextcloud = {
-    enable = true;
-    hostName = "cloud.test.local";
-    https = false; # no SSL for quick test
-
-    config = {
-      adminuser = "admin";
-      adminpassFile = "/run/secrets/test-nextcloud-pass";
-      dbtype = "sqlite"; # simplest for test
-      dbname = "nextcloud";
-    };
-  };
+  #services.nextcloud = {
+  #  enable = true;
+  #  hostName = "cloud.test.local";
+  #  https = false; # no SSL for quick test
+  #
+  #    config = {
+  #      adminuser = "admin";
+  #      adminpassFile = "/run/secrets/test-nextcloud-pass";
+  #      dbtype = "sqlite"; # simplest for test
+  #      dbname = "nextcloud";
+  #    };
+  #  };
 
   # 2️⃣ Paperless-ngx (Python heavy, pulls OCR)
   services.paperless = {
