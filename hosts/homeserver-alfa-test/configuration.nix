@@ -438,11 +438,11 @@
   };
 
   virtualisation.oci-containers.containers = {
-    open-webui = {
-      image = "ghcr.io/open-webui/open-webui:v0.4.5"; # Pinned to stable version
-      ports = [ "3000:8080" ];
-      extraOptions = [ "--add-host=host.docker.internal:host-gateway" ];
-    };
+    #open-webui = {
+    #  image = "ghcr.io/open-webui/open-webui:v0.4.5"; # Pinned to stable version
+    #  ports = [ "3000:8080" ];
+    #  extraOptions = [ "--add-host=host.docker.internal:host-gateway" ];
+    #};
 
     searxng = {
       image = "searxng/searxng:latest";
