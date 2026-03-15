@@ -76,8 +76,6 @@
 
 
   # List services that you want to enable:
-  # Ensure D-Bus is running system-wide
-  services.dbus.enable = true;
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 8080 ];
