@@ -65,13 +65,13 @@
   nixpkgs.config.allowUnfree = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.plantuml = {
-    isNormalUser = true;
-    description = "plantuml";
-    extraGroups = [ "networkmanager" "wheel" ];
-    initialHashedPassword = "$6$ADWBv01H0c4VAOpm$jIKOp7G69UqoVzfccmxdH5BY/5aDaMktaubBkthj8cjA7Zo4YlaItUo93/LblsRoAqQYAZc2tnKHOW1CI1BGS1";
-    #packages = with pkgs; [];
-  };
+  #users.users.plantuml = {
+  #  isNormalUser = true;
+  #  description = "plantuml";
+  #  extraGroups = [ "networkmanager" "wheel" ];
+  #  initialHashedPassword = "$6$ADWBv01H0c4VAOpm$jIKOp7G69UqoVzfccmxdH5BY/5aDaMktaubBkthj8cjA7Zo4YlaItUo93/LblsRoAqQYAZc2tnKHOW1CI1BGS1";
+  #  #packages = with pkgs; [];
+  #};
 
 
   # List services that you want to enable:

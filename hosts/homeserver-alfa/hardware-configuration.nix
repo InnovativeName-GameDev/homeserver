@@ -25,9 +25,20 @@
     device = "/dev/sda1";
     fsType = "ext4";
   };
-  fileSystems."/srv" = {
-    device = "/dev/sdb1";
-    fsType = "ext4";
+
+  #zfs pool for service data
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.enable = true;
+
+  boot.zfs.pools."data" = {
+    # specify the vdevs
+    # start with a single disk, can expand later
+    devices = [ "/dev/sdb" ];
+    mountpoint = "/srv";  # mount directly
+    # optional settings
+    autoScrub.enable = true;
+    compression = "lz4";
+    atime = false;
   };
 
   # Kernel modules for VirtualBox
