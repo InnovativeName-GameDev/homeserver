@@ -24,10 +24,10 @@
           ];
         };
 
-        homeserver-alfa = nixpkgs.lib.nixosSystem {
+        homeserver-alfa-test = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ./hosts/homeserver-alfa/configuration.nix
+            ./hosts/homeserver-alfa-test/configuration.nix
           ];
         };
 
