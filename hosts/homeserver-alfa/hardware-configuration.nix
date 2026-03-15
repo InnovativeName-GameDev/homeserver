@@ -43,6 +43,7 @@
   };
   # note: if the pool changes also update the activation script:
   system.activationScripts.createZfsPool = ''
+    export PATH=$PATH:/run/current-system/sw/bin
     if ! zpool list data >/dev/null 2>&1; then
       echo "Creating ZFS pool data..."
       zpool create -f data /dev/sdb
