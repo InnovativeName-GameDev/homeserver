@@ -1,5 +1,15 @@
-{ pkgs, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
+  imports = [
+    ../../modules/base.nix
+    ../../modules/auto-update.nix
+  ];
+
   # Enable flakes and nix-command
   nix.settings.experimental-features = [
     "nix-command"
@@ -7,51 +17,8 @@
   ];
 
   #Networking
-  networking = {
-    hostName = "homeserver-alfa";
-    hostId = "00000001";
-    networkmanager = {
-      enable = true;
-    };
-  };
-
-  #configure autoUpgrade!
-  system.autoUpgrade = {
-    enable = true;
-    flake = "github:InnovativeName-GameDev/homeserver#homeserver-alfa";
-    flags = [
-      "-L" # print build logs
-    ];
-    dates = "02:00";
-    randomizedDelaySec = "45min";
-  };
-
-
-  # Enable password feedback for sudo
-  security.sudo.extraConfig = "Defaults pwfeedback";
-
-  # Set State Version to the same version everywhere.
-  system.stateVersion = "25.05";
-
-  # Set your time zone.
-  time.timeZone = "Europe/Berlin";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "de_DE.UTF-8";
-    LC_IDENTIFICATION = "de_DE.UTF-8";
-    LC_MEASUREMENT = "de_DE.UTF-8";
-    LC_MONETARY = "de_DE.UTF-8";
-    LC_NAME = "de_DE.UTF-8";
-    LC_NUMERIC = "de_DE.UTF-8";
-    LC_PAPER = "de_DE.UTF-8";
-    LC_TELEPHONE = "de_DE.UTF-8";
-    LC_TIME = "de_DE.UTF-8";
-  };
-
-  # Configure console keymap and Locate
-  console.keyMap = "de";
+  networking.hostName = "homeserver-alfa";
+  networking.hostId = "00000001";
 
   # Set default password for the root user
   users.users.root.hashedPassword = "$6$ADWBv01H0c4VAOpm$jIKOp7G69UqoVzfccmxdH5BY/5aDaMktaubBkthj8cjA7Zo4YlaItUo93/LblsRoAqQYAZc2tnKHOW1CI1BGS1";
@@ -63,8 +30,6 @@
     neofetch
   ];
 
-  nixpkgs.config.allowUnfree = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   #users.users.plantuml = {
   #  isNormalUser = true;
@@ -73,7 +38,6 @@
   #  initialHashedPassword = "$6$ADWBv01H0c4VAOpm$jIKOp7G69UqoVzfccmxdH5BY/5aDaMktaubBkthj8cjA7Zo4YlaItUo93/LblsRoAqQYAZc2tnKHOW1CI1BGS1";
   #  #packages = with pkgs; [];
   #};
-
 
   # List services that you want to enable:
 
@@ -84,8 +48,51 @@
   networking.firewall.enable = true;
 
   environment.variables = {
-    PLANTUML_SECURITY_PROFILE="INTERNET";
-    PLANTUML_LIMIT_SIZE=8192;
+    PLANTUML_SECURITY_PROFILE = "INTERNET";
+    PLANTUML_LIMIT_SIZE = 8192;
   };
 
+  services.nextcloud = {
+    enable = true;
+    package = pkgs.nextcloud33;
+    hostName = "cloud.innovativename.xyz";
+
+    https = true;
+    maxUploadSize = "16G";
+    configureRedis = true;
+    database.createLocally = true;
+    # As recommended by admin panel
+    phpOptions."opcache.interned_strings_buffer" = "24";
+
+    extraAppsEnable = true;
+    extraApps = {
+      inherit (config.services.nextcloud.package.packages.apps) previewgenerator;
+    };
+
+    config = {
+      adminuser = "admin";
+      adminpassFile = config.sops.secrets.nextcloud-adminpassfile.path;
+      dbtype = "pgsql";
+    };
+
+    settings = {
+      defaultPhoneRegion = "US";
+      enabledPreviewProviders = [
+        "OC\\Preview\\BMP"
+        "OC\\Preview\\GIF"
+        "OC\\Preview\\JPEG"
+        "OC\\Preview\\Krita"
+        "OC\\Preview\\MarkDown"
+        "OC\\Preview\\MP3"
+        "OC\\Preview\\OpenDocument"
+        "OC\\Preview\\PNG"
+        "OC\\Preview\\TXT"
+        "OC\\Preview\\XBitmap"
+        # Not included by default
+        "OC\\Preview\\HEIC"
+        "OC\\Preview\\Movie"
+        "OC\\Preview\\MP4"
+      ];
+    };
+  };
 }

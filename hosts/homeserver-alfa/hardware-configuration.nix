@@ -26,8 +26,7 @@
   };
 
   # Limit zfs arc size (optimal would be 1 GB per TB but thats currently not possible) 
-  # Set to 2 GiB
-  # boot.kernelParams = [ "zfs.zfs_arc_max=2147483648" ];
+  boot.kernelParams = [ "zfs.zfs_arc_max=2147483648" ]; # Set to 2 GiB
 
   # note: if the pool changes also update the activation script:
   system.activationScripts.createZfsPool = ''
