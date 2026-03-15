@@ -7,10 +7,6 @@
   ...
 }:
 {
-  imports = [
-    inputs.sops-nix.nixosModules.sops
-  ];
-
   nixpkgs.config.allowUnfree = true;
   nix = {
     gc = {

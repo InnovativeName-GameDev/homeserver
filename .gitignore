@@ -1,2 +1,4 @@
 result
 flake.lock
+age-key.txt
+*.unencrypted.yaml
