@@ -353,22 +353,14 @@
   services.cron.enable = true;
   services.rsyncd.enable = true;
 
-  #services.apacheHttpd.enable = true;
   services.postgresql.enable = true;
   services.redis.servers.shared.enable = true;
   services.mongodb.enable = true;
   services.rabbitmq.enable = true;
   services.jenkins.enable = true;
-  #services.docker.enable = true;
-  #services.podman.enable = true;
-  #services.nextcloud.enable = true;
-  #services.paperless.enable = true;
-  #services.jellyfin.enable = true;
   services.immich.enable = true;
-  #services.authentik.enable = true;
   services.minio.enable = true;
   services.syncthing.enable = true;
-  #services.keycloak.enable = true;
   services.tailscale.enable = true;
   services.minecraft-server.enable = true;
   services.minecraft-server.eula = true;
