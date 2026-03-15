@@ -49,7 +49,7 @@
       mountpoint = "/srv";      # where to mount the pool
       autoScrub.enable = true;  # automatic scrub
       compression = "lz4";      # fast compression
-      atime = false;            # don’t update access time (performance)
+      #atime = false;            # don’t update access time (performance)
     };
   };
   # note: if the pool changes also update the activation script:
