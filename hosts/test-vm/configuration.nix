@@ -32,7 +32,7 @@
     ripgrep # CLI search tool, builds medium
     tree # directory listing
     lsof # open files monitor
-    net-tools # basic networking tools
+    #net-tools # basic networking tools
     iproute2 # ip commands
 
     # --- Medium RAM usage ---

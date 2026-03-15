@@ -15,14 +15,14 @@
     in
     {
       nixosConfigurations = {
-        proxmox-iso = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
-            (nixpkgs + "/nixos/modules/installer/cd-dvd/channel.nix")
-            ./iso/iso.nix
-          ];
-        };
+        #proxmox-iso = nixpkgs.lib.nixosSystem {
+        #  inherit system;
+        #  modules = [
+        #    (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
+        #    (nixpkgs + "/nixos/modules/installer/cd-dvd/channel.nix")
+        #    ./iso/iso.nix
+        #  ];
+        #};
 
         homeserver-alfa-test = nixpkgs.lib.nixosSystem {
           inherit system;
@@ -31,63 +31,70 @@
           ];
         };
 
-        pve-nginx = nixpkgs.lib.nixosSystem {
+        homeserver-alfa = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ./hosts/pve-nginx/configuration.nix
+            ./hosts/homeserver-alfa/configuration.nix
           ];
         };
 
-        pve-nextcloud = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/pve-nextcloud/configuration.nix
-          ];
-        };
+        #pve-nginx = nixpkgs.lib.nixosSystem {
+        #  inherit system;
+        #  modules = [
+        #    ./hosts/pve-nginx/configuration.nix
+        #  ];
+        #};
 
-        pve-paperless-ngx = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/pve-paperless-ngx/configuration.nix
-          ];
-        };
+        #pve-nextcloud = nixpkgs.lib.nixosSystem {
+        #  inherit system;
+        #  modules = [
+        #    ./hosts/pve-nextcloud/configuration.nix
+        #  ];
+        #};
 
-        pve-plantuml = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/pve-plantuml/configuration.nix
-          ];
-        };
+        #pve-paperless-ngx = nixpkgs.lib.nixosSystem {
+        #  inherit system;
+        #  modules = [
+        #    ./hosts/pve-paperless-ngx/configuration.nix
+        #  ];
+        #};
 
-        pve-jenkins = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/pve-jenkins/configuration.nix
-          ];
-        };
+        #pve-plantuml = nixpkgs.lib.nixosSystem {
+        #  inherit system;
+        #  modules = [
+        #    ./hosts/pve-plantuml/configuration.nix
+        #  ];
+        #};
 
-        pve-jellyfin = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/pve-jellyfin/configuration.nix
-          ];
-        };
+        #pve-jenkins = nixpkgs.lib.nixosSystem {
+        #  inherit system;
+        #  modules = [
+        #    ./hosts/pve-jenkins/configuration.nix
+        #  ];
+        #};
 
-        relay-server = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/relay-server/configuration.nix
-            ./modules/nginx.nix
-            ./modules/tailscale.nix
-          ];
-        };
+        #pve-jellyfin = nixpkgs.lib.nixosSystem {
+        #  inherit system;
+        #  modules = [
+        #    ./hosts/pve-jellyfin/configuration.nix
+        #  ];
+        #};
 
-        test-vm = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/test-vm/configuration.nix
-          ];
-        };
+        #relay-server = nixpkgs.lib.nixosSystem {
+        #  inherit system;
+        #  modules = [
+        #    ./hosts/relay-server/configuration.nix
+        #    ./modules/nginx.nix
+        #    ./modules/tailscale.nix
+        #  ];
+        #};
+
+        #test-vm = nixpkgs.lib.nixosSystem {
+        #  inherit system;
+        #  modules = [
+        #    ./hosts/test-vm/configuration.nix
+        #  ];
+        #};
       };
     };
 }
