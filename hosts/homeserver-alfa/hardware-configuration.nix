@@ -29,29 +29,6 @@
   # Set to 2 GiB
   # boot.kernelParams = [ "zfs.zfs_arc_max=2147483648" ];
 
-  # zfs pools (data disk) setup
-  boot.zfs.pools = {
-    # Name of the pool
-    data = { #if the disk structure changes please also change the activation script below
-      # For a single-disk pool:
-      devices = [ "/dev/sdb" ];
-
-      # For a RAID1 mirror:
-      # devices = [{ type = "mirror"; devices = [ "/dev/sdb" "/dev/sdc" ]; }];
-
-      # For RAID10 (mirrored pairs):
-      #devices = [
-      #  { type = "mirror"; devices = [ "/dev/sdb" "/dev/sdc" ]; }
-      #  { type = "mirror"; devices = [ "/dev/sdd" "/dev/sde" ]; }
-      #];
-
-      # Pool properties
-      mountpoint = "/srv";      # where to mount the pool
-      autoScrub.enable = true;  # automatic scrub
-      compression = "lz4";      # fast compression
-      #atime = false;            # don’t update access time (performance)
-    };
-  };
   # note: if the pool changes also update the activation script:
   system.activationScripts.createZfsPool = ''
     export PATH=$PATH:/run/current-system/sw/bin
