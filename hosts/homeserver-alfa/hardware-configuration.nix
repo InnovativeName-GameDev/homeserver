@@ -5,19 +5,31 @@
   boot.loader.grub.useOSProber = false;
   boot.loader.grub.zfsSupport = true;
 
+  # Kernel modules for VirtualBox
+  boot.kernelModules = [
+    "vboxguest"
+    "vboxsf"
+    "vboxvideo"
+  ];
+
+  # add zfs support
   boot.supportedFilesystems = [ "zfs" ];
 
-  # Minimal filesystem setup (root only)
   fileSystems."/" = {
     device = "/dev/sda1";
     fsType = "ext4";
+  };
+  fileSystems."/srv" = {
+    device = "data";
+    fsType = "zfs";
+    options = [ "defaults" ];
   };
 
   # Limit zfs arc size (optimal would be 1 GB per TB but thats currently not possible) 
   # Set to 2 GiB
   # boot.kernelParams = [ "zfs.zfs_arc_max=2147483648" ];
 
-  # note: for initial setup run:
+  # zfs pools (data disk) setup
   boot.zfs.pools = {
     # Name of the pool
     data = { #if the disk structure changes please also change the activation script below
@@ -51,11 +63,4 @@
       zfs set atime=off data
     fi
   '';
-
-  # Kernel modules for VirtualBox
-  boot.kernelModules = [
-    "vboxguest"
-    "vboxsf"
-    "vboxvideo"
-  ];
 }
