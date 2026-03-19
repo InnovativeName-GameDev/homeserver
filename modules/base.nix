@@ -7,6 +7,10 @@
   ...
 }:
 {
+  imports = [
+    inputs.sops-nix.nixosModules.sops
+  ];
+
   nixpkgs.config.allowUnfree = true;
   nix = {
     gc = {
@@ -19,6 +23,11 @@
       auto-optimise-store = true;
     };
   };
+
+  sops = {
+    nextcloud-adminpassfile = ./../secrets/nextcloud-adminpassfile.yaml;
+  };
+
 
   # Enable password feedback for sudo
   security.sudo.extraConfig = "Defaults pwfeedback";

@@ -2,10 +2,18 @@
   config,
   pkgs,
   lib,
+  inputs, 
+  sops,
+  sopsLib,
   ...
 }:
+let
+  adminPassFile = sopsLib.getSecret ./secrets/nextcloud-adminpassfile.yaml;
+in
 {
   imports = [
+    inputs.sops-nix.nixosModules.sops
+
     ../../modules/base.nix
     ../../modules/auto-update.nix
   ];
@@ -28,6 +36,7 @@
   environment.systemPackages = with pkgs; [
     btop
     neofetch
+    ffmpeg
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -55,12 +64,18 @@
   # DB (postgresql)
   services.postgresql = {
     enable = true;
-    ensureDatabases = [ "mydatabase" ];
+    #ensureDatabases = [ "mydatabase" ];
     authentication = pkgs.lib.mkOverride 10 ''
       #type database  DBuser  auth-method
       local all       all     trust
     '';
     dataDir = "/srv/postgresql";
+  };
+
+
+  sops.nextcloud-adminpassfile = {
+    owner = "nextcloud";
+    group = "nextcloud";
   };
 
 
@@ -77,13 +92,13 @@
     phpOptions."opcache.interned_strings_buffer" = "24";
 
     config = {
-      adminuser = "admin";
-      adminpassFile = config.sops.secrets.nextcloud-adminpassfile.path;
+      adminuser = "InnovativeName";
+      adminpassFile = adminPassFile;
       dbtype = "pgsql";
     };
 
     settings = {
-      defaultPhoneRegion = "US";
+      defaultPhoneRegion = "DE";
       enabledPreviewProviders = [
         "OC\\Preview\\BMP"
         "OC\\Preview\\GIF"
