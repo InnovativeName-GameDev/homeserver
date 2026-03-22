@@ -1,6 +1,6 @@
 {
-  nixpkgs,
   inputs,
+  nixpkgs,
   config,
   pkgs,
   vars,
@@ -19,15 +19,13 @@
       options = "--delete-older-than 7d";
     };
     settings = {
-      experimental-features = "nix-command flakes";
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       auto-optimise-store = true;
     };
   };
-
-  sops = {
-    nextcloud-adminpassfile = ./../secrets/nextcloud-adminpassfile.yaml;
-  };
-
 
   # Enable password feedback for sudo
   security.sudo.extraConfig = "Defaults pwfeedback";
@@ -52,14 +50,11 @@
   # Configure console keymap and Locate
   console.keyMap = "de";
 
-  #sops = {
-  #  defaultSopsFile = ./../../secrets/secrets.yaml;
-  #  age.sshKeyPaths = [ "/nix/secret/initrd/ssh_host_ed25519_key" ];
-  #  secrets."user-password".neededForUsers = true;
-  #  secrets."user-password" = { };
-  #  # inspo: https://github.com/Mic92/sops-nix/issues/427
-  #  gnupg.sshKeyPaths = [ ];
-  #};
+  sops-nix.secrets = {
+    nextcloud-adminpassfile = {
+      path = ./secrets/nextcloud-adminpassfile.enc.yaml;
+    };
+  };
 
   #enable tailscale
   services.tailscale.enable = true;

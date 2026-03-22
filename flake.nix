@@ -6,20 +6,19 @@
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs =
     {
       self,
+      inputs,
       nixpkgs,
-      sops-nix,
+      sops-nix
     }:
     let
       system = "x86_64-linux";
-
-      # Import sops-nix
-      sopsLib = import sops-nix;
     in
     {
       nixosConfigurations = {
@@ -27,11 +26,10 @@
         homeserver-alfa = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
+            sops-nix.nixosModules.sops
             ./hosts/homeserver-alfa/configuration.nix
             ./hosts/homeserver-alfa/hardware-configuration.nix
-            sopsLib.nixosModule # Enables SOPS integration
           ];
-          specialArgs = { inherit sopsLib; };
         };
 
         # Test server
@@ -40,9 +38,7 @@
           modules = [
             ./hosts/homeserver-alfa-test/configuration.nix
             ./hosts/homeserver-alfa-test/hardware-configuration.nix
-            sopsLib.nixosModule
           ];
-          specialArgs = { inherit sopsLib; };
         };
       };
     };

@@ -3,7 +3,6 @@
 {
   # Minimal system
   boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda"; # Install GRUB to the disk
   boot.loader.grub.useOSProber = false;
 

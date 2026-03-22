@@ -3,7 +3,6 @@
 {
   # Minimal system
   boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda"; # Install GRUB to the disk
   boot.loader.grub.useOSProber = false;
 
@@ -25,12 +24,6 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-
-  # Enable flakes and nix-command
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
 
   # Enable password feedback for sudo
   security.sudo.extraConfig = "Defaults pwfeedback";
@@ -193,7 +186,7 @@
     ltrace
     lua
     luarocks
-    lxd
+    lxd-lts
     lz4
     man
     mariadb
@@ -296,7 +289,7 @@
     swift
     syncthing
     sysstat
-    taskwarrior
+    taskwarrior3
     tcpdump
     terraform
     tig

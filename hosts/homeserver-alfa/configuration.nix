@@ -2,26 +2,12 @@
   config,
   pkgs,
   lib,
-  inputs, 
-  sops,
-  sopsLib,
+  sops-nix,
   ...
-}:
-let
-  adminPassFile = sopsLib.getSecret ./secrets/nextcloud-adminpassfile.yaml;
-in
-{
+}:{
   imports = [
-    inputs.sops-nix.nixosModules.sops
-
     ../../modules/base.nix
     ../../modules/auto-update.nix
-  ];
-
-  # Enable flakes and nix-command
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
   ];
 
   #Networking
@@ -73,10 +59,10 @@ in
   };
 
 
-  sops.nextcloud-adminpassfile = {
-    owner = "nextcloud";
-    group = "nextcloud";
-  };
+  #sops.nextcloud-adminpassfile = {
+  #  owner = "nextcloud";
+  #  group = "nextcloud";
+  #};
 
 
   services.nextcloud = {
@@ -91,9 +77,16 @@ in
     # As recommended by admin panel
     phpOptions."opcache.interned_strings_buffer" = "24";
 
+    # Instead of using pkgs.nextcloud28Packages.apps,
+    # we'll reference the package version specified above
+    extraApps = {
+      inherit (config.services.nextcloud.package.packages.apps) news contacts calendar tasks;
+    };
+    extraAppsEnable = true;
+
     config = {
-      adminuser = "InnovativeName";
-      adminpassFile = adminPassFile;
+      adminuser = "ncp";
+      adminpassFile = "aaa";
       dbtype = "pgsql";
     };
 
