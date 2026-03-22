@@ -229,7 +229,7 @@
     openvpn
     p7zip
     packer
-    paperless-ngx
+#    paperless-ngx
     perl
     perlPackages.Mojolicious
     pgcli
@@ -374,22 +374,22 @@
   #  };
 
   # 2️⃣ Paperless-ngx (Python heavy, pulls OCR)
-  services.paperless = {
-    enable = true;
-    address = "127.0.0.1";
-    port = 28981;
-
-    dataDir = "/srv/paperless";
-    mediaDir = "/srv/paperless/media";
-    consumptionDir = "/srv/paperless/consume";
-
-    settings = {
-      PAPERLESS_OCR_LANGUAGE = "eng";
-      PAPERLESS_TIME_ZONE = "Europe/Berlin";
-      PAPERLESS_ADMIN_USER = "test";
-      PAPERLESS_DBTYPE = "sqlite";
-    };
-  };
+ # services.paperless = {
+#    enable = true;
+#    address = "127.0.0.1";
+#    port = 28981;
+#
+#    dataDir = "/srv/paperless";
+#    mediaDir = "/srv/paperless/media";
+#    consumptionDir = "/srv/paperless/consume";
+#
+  #  settings = {
+  #    PAPERLESS_OCR_LANGUAGE = "eng";
+  #    PAPERLESS_TIME_ZONE = "Europe/Berlin";
+  #    PAPERLESS_ADMIN_USER = "test";
+  #    PAPERLESS_DBTYPE = "sqlite";
+  #  };
+  #};
 
   # 3️⃣ Jellyfin (media server, pulls ffmpeg and lots of codecs)
   services.jellyfin = {
@@ -440,14 +440,4 @@
       image = "ghcr.io/immich-app/immich-machine-learning:release";
     };
   };
-
-  nixpkgs.overlays = [
-    (final: prev: {
-      paperless-ngx = prev.paperless-ngx.overrideAttrs (_: {
-        doCheck = false;
-        checkPhase = "true";
-      });
-    })
-  ];
-
 }
