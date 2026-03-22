@@ -23,7 +23,8 @@
   ];
 
   # Enable networking
-  networking.networkmanager.enable = true;
+  networking.hostName = "alfa-test";
+  networking.useDHCP = true;  # simplest option
 
   # Enable password feedback for sudo
   security.sudo.extraConfig = "Defaults pwfeedback";

@@ -2,12 +2,12 @@
   config,
   pkgs,
   lib,
-  sops-nix,
   ...
 }:{
   imports = [
     ../../modules/base.nix
     ../../modules/auto-update.nix
+    ./hardware-configuration.nix
   ];
 
   #Networking

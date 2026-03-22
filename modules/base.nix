@@ -3,7 +3,6 @@
   nixpkgs,
   config,
   pkgs,
-  vars,
   ...
 }:
 {
@@ -50,9 +49,11 @@
   # Configure console keymap and Locate
   console.keyMap = "de";
 
-  sops-nix.secrets = {
-    nextcloud-adminpassfile = {
-      path = ./secrets/nextcloud-adminpassfile.enc.yaml;
+  sops-nix = {
+    secrets = {
+      nextcloud-adminpassfile = {
+        path = ../secrets/nextcloud-adminpassfile.enc.yaml;
+      };
     };
   };
 
