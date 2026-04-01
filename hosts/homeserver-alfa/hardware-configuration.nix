@@ -11,6 +11,7 @@
     "vboxsf"
     "vboxvideo"
   ];
+  virtualisation.virtualbox.guest.enable = true;
 
   # add zfs support
   boot.supportedFilesystems = [ "zfs" ];

@@ -8,6 +8,7 @@
 {
   imports = [
     inputs.sops-nix.nixosModules.sops
+    ./packages.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -49,12 +50,13 @@
   # Configure console keymap and Locate
   console.keyMap = "de";
 
-  sops-nix = {
-    secrets = {
-      nextcloud-adminpassfile = {
-        path = ../secrets/nextcloud-adminpassfile.enc.yaml;
-      };
-    };
+  sops = {
+    defaultSopsFile = ./../secrets/secrets.yaml;
+    age.sshKeyPaths = ["/nix/secret/initrd/ssh_host_ed25519_key"];
+    secrets."user-password".neededForUsers = true;
+    secrets."user-password" = {};
+    # inspo: https://github.com/Mic92/sops-nix/issues/427
+    gnupg.sshKeyPaths = [];
   };
 
   #enable tailscale

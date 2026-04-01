@@ -1,6 +1,5 @@
 keys:
-  - &inno age1gh5jpcmhkxqtw6dz2p6tcrl6fcuh8dw0r0umpqrtwrc6y4wlhyxqmw8rxu
-  - &inno_alfa_test
+  - &inno age1lvwaq7ur8sauwexa5fa9u9h428258l47mdvyd7l7gahsq9g0rvwqj6qh34
 creation_rules:
   - path_regex: secrets/secrets.yaml$
     key_groups:

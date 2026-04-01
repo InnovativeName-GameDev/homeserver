@@ -1,5 +1,7 @@
 # homeserver
 
+Inspirec a lot by: https://github.com/eh8/chenglab
+
 ### Managing Secrets with sops-nix
 Links:  
 - https://github.com/Mic92/sops-nix

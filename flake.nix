@@ -18,19 +18,21 @@
       ...
     } @ inputs: let
       inherit (self) outputs;
+      vars = import ./vars.nix;
 
       system = "x86_64-linux";
     in
     {
       nixosConfigurations = {
         # Main homeserver
-        #homeserver-alfa = nixpkgs.lib.nixosSystem {
-        #  inherit system;
-        #  modules = [
-        #    ./hosts/homeserver-alfa/configuration.nix
-        #  ];
-        #  specialArgs = {inherit inputs outputs sops-nix;};
-        #};
+        homeserver-alfa = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./hosts/homeserver-alfa/configuration.nix
+            sops-nix.nixosModules.sops
+          ];
+          specialArgs = {inherit inputs outputs vars;};
+        };
 
         # Test server
         homeserver-alfa-test = nixpkgs.lib.nixosSystem {
@@ -39,8 +41,14 @@
             ./hosts/homeserver-alfa-test/configuration.nix
             ./hosts/homeserver-alfa-test/hardware-configuration.nix
           ];
-          specialArgs = {inherit inputs outputs sops-nix;};
+          specialArgs = {inherit inputs outputs vars;};
         };
+
+        #iso-installer = nixpkgs.lib.nixosSystem {
+        #  modules = [
+        #    ./hosts/iso-installer/configuration.nix
+        #  ];
+        #}
       };
     };
 }
